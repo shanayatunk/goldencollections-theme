@@ -105,7 +105,7 @@
           "settings": {
             "image_overlay_opacity": 20,
             "heading": "<strong>Feelori Bangles</strong>",
-            "heading_size": "h1",
+            "heading_size": "h2",
             "subheading": "Explore FeelOri’s handcrafted bangles - Lightweight, elegant designs for every occasion, from weddings to daily wear.",
             "button_label": "Shop Now",
             "link": "shopify://collections/feelori-bangles-cz-kada-gold-plated-pearls",
@@ -122,7 +122,7 @@
           "settings": {
             "image_overlay_opacity": 20,
             "heading": "<strong>Feelori Hair Extensions</strong>",
-            "heading_size": "h1",
+            "heading_size": "h2",
             "subheading": "Transform your look with FeelOri’s Hair Extensions—crafted from 100% human hair by artisans with over 65 years of expertise. ",
             "button_label": "Shop Now",
             "link": "shopify://collections/hair-extensions-feel-original-with-human-hair-glamour-feelori",
@@ -163,7 +163,7 @@
           "disabled": true,
           "settings": {
             "heading": "Feel Original. ",
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         },
         "button": {
@@ -304,7 +304,7 @@
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Deity Jewellery for God & Goddess",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_ratio": "adapt",
         "columns_desktop": 5,
         "color_scheme": "",
@@ -387,7 +387,7 @@
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Kemp Jewellery",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_ratio": "adapt",
         "columns_desktop": 5,
         "color_scheme": "",
@@ -456,7 +456,7 @@
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Kemp Black Jewellery",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_ratio": "adapt",
         "columns_desktop": 5,
         "color_scheme": "",
@@ -525,7 +525,7 @@
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Bharatanatyam Jewellery",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_ratio": "adapt",
         "columns_desktop": 5,
         "color_scheme": "",
@@ -577,7 +577,7 @@
       ],
       "settings": {
         "title": "Why Choose GoldenCollections?",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_width": "half",
         "image_ratio": "adapt",
         "button_label": "",
@@ -640,7 +640,7 @@
       ],
       "settings": {
         "title": "Shop GoldenCollections With Confidence",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_width": "half",
         "image_ratio": "adapt",
         "button_label": "",
@@ -661,7 +661,7 @@
         "blog": "news",
         "post_limit": 3,
         "heading": "From our Heritage Journal",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "columns_desktop": 3,
         "show_view_all": true,
         "show_image": true,
@@ -679,7 +679,7 @@
           "type": "heading",
           "settings": {
             "heading": "<a href=\"https://g.page/r/CbA6KqXz4_UpEAE/review\" target=\"_blank\" title=\"https://g.page/r/CbA6KqXz4_UpEAE/review\">Customer Reviews </a>",
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         }
       },
