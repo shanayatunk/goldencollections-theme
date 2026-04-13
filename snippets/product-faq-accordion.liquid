@@ -1,0 +1,114 @@
+{% comment %}
+  Golden Collections – Product-Specific FAQs (UI Only)
+  Schema handled in main-product.liquid
+  Colours: Antique gold #D3BC69 | Background #FDF9F2
+{% endcomment %}
+
+{% liquid
+  assign faq_metafield = product.metafields.custom.product_faqs
+  assign faqs = faq_metafield.value
+
+  if faqs and faqs.size > 0
+    assign section_id = 'faq-accordion-' | append: product.id
+  endif
+%}
+
+{% if faqs and faqs.size > 0 %}
+  <style>
+  .gc-faq-accordion-container {
+    margin: 60px auto;
+    padding: 50px 0 20px;
+    border-top: 2px solid #D3BC69;
+    background-color: #FDF9F2;
+    font-family: 'Lato', sans-serif;
+    color: #444;
+    max-width: 1000px;
+  }
+  .gc-faq-accordion-container h2 {
+    margin-bottom: 40px;
+    font-size: 2.6rem;
+    text-align: center;
+    font-family: 'New York', 'Times New Roman', serif;
+    font-weight: 700;
+    color: #2c2c2c;
+    letter-spacing: 0.5px;
+  }
+  .gc-faq-accordion details {
+    border-bottom: 1px solid #e8dcc1;
+    padding: 20px 0;
+    background-color: #ffffff;
+  }
+  .gc-faq-accordion summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.45rem;
+    list-style: none;
+    color: #2c2c2c;
+    font-family: 'New York', 'Times New Roman', serif;
+    transition: color 0.3s ease;
+  }
+  .gc-faq-accordion summary:hover {
+    color: #D3BC69;
+  }
+  .gc-faq-accordion summary::-webkit-details-marker { display: none; }
+  
+  .gc-faq-accordion-icon {
+    width: 1.3em;
+    height: 1.3em;
+    fill: #D3BC69;
+    transition: transform 0.35s ease-in-out;
+  }
+  details[open] .gc-faq-accordion-icon {
+    transform: rotate(45deg);
+  }
+  .gc-faq-accordion__content {
+    padding-top: 16px;
+    line-height: 1.9;
+    font-size: 1.15rem;
+    color: #555;
+    font-family: 'Lato', sans-serif;
+  }
+  .gc-faq-accordion__content p,
+  .gc-faq-accordion__content ul,
+  .gc-faq-accordion__content li {
+    margin: 0 0 0.8em;
+    padding: 0;
+  }
+  .gc-faq-accordion__content ul { padding-left: 1.4rem; }
+  .gc-faq-accordion__content li { list-style-type: disc; }
+  .gc-faq-accordion__content a {
+    color: #D3BC69;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .gc-faq-accordion-container { margin: 40px auto; padding-top: 40px; }
+    .gc-faq-accordion-container h2 { font-size: 2.1rem; margin-bottom: 32px; }
+    .gc-faq-accordion summary { font-size: 1.3rem; }
+    .gc-faq-accordion__content { font-size: 1.05rem; }
+  }
+  </style>
+
+  <div class="gc-faq-accordion-container page-width" id="{{ section_id }}">
+    <h2>Jewellery Care & Alankaram FAQs</h2>
+    <div class="gc-faq-accordion">
+      {% for faq in faqs %}
+        <details>
+          <summary>
+            {{ faq.question }}
+            <svg class="gc-faq-accordion-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+            </svg>
+          </summary>
+          <div class="gc-faq-accordion__content rte">
+            {{ faq.answer }}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,17 @@
+{% comment %}
+Auto-link glossary terms in content.
+Usage: {% render 'auto-link-glossary', content: article.content %}
+{% endcomment %}
+
+{% assign terms = pages['jewelry-glossary'].metafields.custom.glossary_terms.value %}
+{% assign new_content = content | default: '' %}
+
+{% if terms and terms.size > 0 %}
+  {% for term in terms %}
+    {% assign pattern = term.name %}
+    {% assign link = '<a href="/pages/jewelry-glossary" class="feelori-glossary-link" target="_blank" rel="noopener">' | append: term.name | append: '</a>' %}
+    {%- assign new_content = new_content | replace_first: term.name, link -%}
+  {% endfor %}
+{% endif %}
+
+{{ new_content }}

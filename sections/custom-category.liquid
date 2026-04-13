@@ -1,0 +1,66 @@
+{% comment %} 
+  Custom Category Section - Displays collections in circles on the homepage 
+{% endcomment %}
+
+<div class="custom-category-section" style="padding: {{ section.settings.custom_padding }};">
+  <h2 class="category-title">{{ section.settings.title }}</h2>
+  <div class="category-grid">
+    {% for block in section.blocks %}
+      {% assign collection = block.settings.collection %}
+      {% if collection != blank %}
+        <a href="{{ collection.url }}" class="category-item">
+          <div class="category-circle">
+            {% if collection.image %}
+              <img src="{{ collection.image | img_url: '200x200' }}" alt="{{ collection.title }}">
+            {% else %}
+              <div class="category-placeholder">{{ collection.title | slice: 0,1 }}</div>
+            {% endif %}
+          </div>
+          <p class="category-name">{{ collection.title }}</p>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Category Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "range",
+      "id": "custom_padding",
+      "label": "Section Padding",
+      "default": 20,
+      "min": 0,
+      "max": 50,
+      "step": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Choose Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Category Section",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

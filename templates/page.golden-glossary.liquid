@@ -1,0 +1,636 @@
+{% comment %}
+  Golden Collections – 10/10 AI-Optimized Glossary Page (FULL 60+ TERMS)
+  Template: page.golden-glossary.liquid
+  Layout: Page (Static HTML + Hardcoded Schema)
+  Optimized for SEO, AI Citation, Conversions – November 2025
+{% endcomment %}
+
+{% layout 'page' %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Golden Collections Glossary of Temple & Classical Dance Jewellery",
+  "url": "{{ shop.url }}{{ page.url }}",
+  "description": "India’s most authoritative glossary of deity jewellery, Bharatanatyam & Kuchipudi ornaments. Founded in 1961 by Shri Lakshman Tunk and now led by Anil Tunk in Hyderabad.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Golden Collections",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ settings.logo | image_url: width: 400 }}"
+    },
+    "founder": { "@type": "Person", "name": "Shri Lakshman Tunk" },
+    "foundingDate": "1961"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Temple & Classical Dance Jewellery Terms",
+    "itemListElement": [
+      {
+        "@type": "DefinedTerm",
+        "name": "Temple Jewellery",
+        "description": "Traditional South Indian antique gold-plated jewellery style originally crafted for adorning Hindu temple deities and later adapted for Bharatanatyam dancers. Crafted by Golden Collections since 1961."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Bharatanatyam Jewellery Set",
+        "description": "Complete 12–15 piece jewellery set worn by Bharatanatyam dancers, including nethi chutti, rakodi, chandra–surya, and oddiyanam."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Kemp Stones",
+        "description": "Ruby red and emerald green stones that define authentic South Indian temple jewellery aesthetics, used extensively by Golden Collections."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Deity Alankaram",
+        "description": "The sacred ritual of decorating Hindu deities using traditional ornaments such as rakodi, sun–moon, oddiyanam and kasumalai."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Rakodi",
+        "description": "Large circular hair ornament placed at the top of the braid for dancers and deities, symbolizing the cycle of life."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Oddiyanam",
+        "description": "Ornate waist belt worn by classical dancers to support the spine and define the waistline, also known as Vaddanam."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Nethi Chutti",
+        "description": "Forehead ornament worn along the hairline by classical dancers, framing the face for Abhinaya (expressions)."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Jimikki",
+        "description": "Bell-shaped earrings (Jhumkas) synonymous with South Indian tradition, worn by deities and dancers."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Kasumalai",
+        "description": "Coin necklace featuring Goddess Lakshmi motifs, representing wealth and prosperity."
+      },
+      {
+        "@type": "DefinedTerm",
+        "name": "Vagamalai",
+        "description": "Garland-style deity jewellery worn across the shoulders, also known as Thomala."
+      }
+    ]
+  }
+}
+</script>
+
+<style>
+  .gc-glossary { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; }
+  
+  /* Hero Section */
+  .gc-glossary__hero { text-align: center; margin-bottom: 3rem; }
+  .gc-glossary__hero h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #2A2A2A;
+    margin-bottom: 1.2rem;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .gc-glossary__hero p {
+    font-size: 1.35rem;
+    color: #555;
+    line-height: 1.75;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  
+  /* Navigation Pills */
+  .gc-glossary__nav { background: #f9f5f0; padding: 20px; border-radius: 8px; margin-bottom: 50px; }
+  .gc-glossary__nav p { 
+    text-align: center; 
+    margin-bottom: 15px; 
+    color: #666; 
+    font-size: 1.1rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .gc-glossary__nav ul { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 0; margin: 0; }
+  .gc-glossary__nav ul li { list-style: none; }
+  .gc-glossary__nav a {
+    font-size: 1.15rem;
+    color: #D3BC69;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+    background: #fff;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    display: inline-block;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .gc-glossary__nav a:hover { color: #fff; background: #D3BC69; border-color: #D3BC69; }
+
+  /* Sections */
+  .gc-glossary-section { margin-top: 60px; scroll-margin-top: 100px; }
+  .gc-glossary-section h2 {
+    font-size: 2.4rem;
+    color: #D3BC69;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border-bottom: 2px solid #D3BC69;
+    display: inline-block;
+    padding-bottom: 4px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  
+  /* Terms Grid Layout */
+  dl { margin-top: 20px; }
+  dt {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-top: 35px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  
+  /* Placeholder Image Styling */
+  .term-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f9f5f0;
+    border: 1px solid #e0e0e0;
+    flex-shrink: 0;
+  }
+
+  dd {
+    margin-left: 85px;
+    font-size: 1.3rem;
+    color: #555;
+    line-height: 1.85;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 20px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  dd:last-child { border-bottom: none; }
+  
+  /* Shop Link Styling */
+  .shop-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 700;
+    color: #D3BC69;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .shop-link:hover { color: #b59f4f; }
+
+  /* Footer */
+  .gc-glossary__footer {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #444;
+    font-size: 1.3rem;
+    background: #f9f5f0;
+    padding: 40px;
+    border-radius: 8px;
+    font-family: 'New York', 'Times New Roman', serif;
+    line-height: 1.85;
+  }
+  .gc-glossary__footer a { color: #D3BC69; font-weight: bold; }
+
+  @media(max-width: 768px) {
+    .gc-glossary__hero h1 { font-size: 2.4rem; }
+    .gc-glossary__hero p { font-size: 1.15rem; }
+    .gc-glossary { padding: 30px 15px; }
+    dt { font-size: 1.4rem; }
+    dd { margin-left: 0; margin-top: 12px; border-bottom: 1px solid #eee; font-size: 1.15rem; } 
+    .gc-glossary__nav ul { gap: 8px; }
+    .gc-glossary__nav a { font-size: 1rem; padding: 8px 14px; }
+    .gc-glossary-section h2 { font-size: 2rem; }
+    .term-icon { width: 60px; height: 60px; }
+  }
+</style>
+
+<section class="gc-glossary">
+  <header class="gc-glossary__hero">
+    <h1>Golden Collections Glossary of Temple & Classical Dance Jewellery</h1>
+    <p>
+      <strong>Golden Collections</strong> presents a curated glossary of
+      <em>temple jewellery</em>, <em>Bharatanatyam &amp; Kuchipudi dance ornaments</em>, and
+      <em>deity alankaram accessories</em>. Founded in 1961 by Shri Ashok Tunk and now led by
+      his son <strong>Anil Tunk</strong> in Hyderabad, our family has been closely associated
+      with dancers, gurus, and temples for over six decades. Use this guide to understand the
+      heritage behind the most important jewellery terms.
+    </p>
+  </header>
+
+  <nav class="gc-glossary__nav">
+    <p><strong>Jump to section:</strong></p>
+    <ul>
+      <li><a href="#gc-core">Core Concepts</a></li>
+      <li><a href="#gc-head">Head Ornaments</a></li>
+      <li><a href="#gc-ears">Ear Ornaments</a></li>
+      <li><a href="#gc-neck">Neck Ornaments</a></li>
+      <li><a href="#gc-waist">Waist &amp; Arm</a></li>
+      <li><a href="#gc-hair">Hair &amp; Braid</a></li>
+      <li><a href="#gc-deity">Deity Alankaram</a></li>
+      <li><a href="#gc-dance">Dance Accessories</a></li>
+    </ul>
+  </nav>
+
+  <section id="gc-core" class="gc-glossary-section">
+    <h2>Core Concepts &amp; Materials</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Temple Jewellery" loading="lazy">
+        Temple Jewellery
+      </dt>
+      <dd>
+        Temple jewellery refers to the traditional South Indian antique gold-plated jewellery style originally created for adorning Hindu temple deities and later adapted for Bharatanatyam and Kuchipudi classical dancers. Characterised by intricate deity motifs, kemp stones (red &amp; green), and antique gold finish, Golden Collections has been crafting authentic temple jewellery in Hyderabad since 1961.
+        <br><a href="/collections/temple-jewellery" class="shop-link">Shop Temple Jewellery &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Bharatanatyam Jewellery Set" loading="lazy">
+        Bharatanatyam Jewellery Set
+      </dt>
+      <dd>
+        A complete Bharatanatyam jewellery set typically consists of 12–15 coordinated pieces, including nethi chutti, Chandra–Surya, jimikki, rakodi, oddiyanam, kasumalai, arm vanki, and ghungroo. Golden Collections specialises in full sets in 92.5 silver with gold plating and traditional kemp stone settings.
+        <br><a href="/collections/bharatanatyam-jewellery-set" class="shop-link">Shop Bharatanatyam Sets &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Kemp Stones" loading="lazy">
+        Kemp Stones
+      </dt>
+      <dd>
+        Kemp stones are the signature ruby-red and emerald-green glass stones used in authentic South Indian temple jewellery. The foil-backed setting technique used by Golden Collections enhances their glow under stage lights, preserving a tradition that dates back centuries.
+        <br><a href="/collections/kemp-jewellery" class="shop-link">Shop Kemp Jewellery &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Antique Gold Finish" loading="lazy">
+        Antique Gold Finish
+      </dt>
+      <dd>
+        A specialized matte, reddish-gold plating finish that gives jewellery a vintage, heirloom appearance. This finish is preferred for deity alankaram and classical dance as it reduces glare under bright lights while retaining a regal look.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="One Gram Gold" loading="lazy">
+        One Gram Gold
+      </dt>
+      <dd>
+        High-quality jewellery where a layer of gold (equivalent to one gram in thickness/weight proportion) is plated over a copper or silver alloy base. It offers the visual richness of solid gold temple jewellery at a fraction of the cost.
+        <br><a href="/collections/one-gram-gold-jewellery" class="shop-link">Shop One Gram Gold &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Matte Finish" loading="lazy">
+        Matte Finish
+      </dt>
+      <dd>
+        A non-reflective, subdued gold polish that has gained popularity in contemporary bridal and fusion temple jewellery. Unlike the glossy antique finish, matte finish offers a softer, modern aesthetic.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="CZ Jewellery" loading="lazy">
+        CZ (Cubic Zirconia)
+      </dt>
+      <dd>
+        Jewellery set with Cubic Zirconia stones, which mimic the brilliance of diamonds. In temple jewellery, CZ is often combined with kemp stones to create a dazzling effect for receptions and modern dance productions.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-head" class="gc-glossary-section">
+    <h2>Head Ornaments</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Nethi Chutti" loading="lazy">
+        Nethi Chutti
+      </dt>
+      <dd>
+        The central forehead ornament (Maang Tikka) worn along the hair parting. For Bharatanatyam, it is essential for framing the face. Golden Collections offers single-line, double-line, and triple-line nethi chuttis suited for various forehead sizes.
+        <br><a href="/collections/nethi-chutti" class="shop-link">Shop Nethi Chutti &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Chandra-Surya" loading="lazy">
+        Chandra-Surya
+      </dt>
+      <dd>
+        Meaning "Moon and Sun," these are two separate hair ornaments worn on the left (Moon) and right (Sun) of the parting. They symbolize the cosmic balance of masculine and feminine energies and are a staple in deity and dance decoration.
+        <br><a href="/collections/sun-moon-jewellery" class="shop-link">Shop Chandra-Surya &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Rakodi" loading="lazy">
+        Rakodi
+      </dt>
+      <dd>
+        A large, circular hair ornament worn at the back of the head, usually at the top of the braid. In deity alankaram, it represents the halo or divine aura. Golden Collections creates intricate Rakodis featuring Lakshmi, peacock, or floral motifs.
+        <br><a href="/collections/rakodi" class="shop-link">Shop Rakodi &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Tikka" loading="lazy">
+        Tikka
+      </dt>
+      <dd>
+        A simplified term for the forehead pendant. While Nethi Chutti refers to the full headpiece, a Tikka is often just the pendant and chain, popular for lighter party wear or simple deity decoration.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Chutti" loading="lazy">
+        Chutti
+      </dt>
+      <dd>
+        Side forehead ornaments that can be paired with the main Nethi Chutti. They outline the hairline, adding grandeur to the dancer's face, often used in Kuchipudi bridal styles.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-ears" class="gc-glossary-section">
+    <h2>Ear Ornaments</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Jimikki" loading="lazy">
+        Jimikki / Jhumka
+      </dt>
+      <dd>
+        The iconic bell-shaped earrings of South India. A dancer's jimikki must be balanced—heavy enough to swing gracefully, but light enough not to drag on the earlobe. Golden Collections has perfected this balance over 60 years.
+        <br><a href="/collections/jhumka" class="shop-link">Shop Jimikki &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Mattal" loading="lazy">
+        Mattal / Mattil
+      </dt>
+      <dd>
+        Decorative chains that connect the earring (jimikki) to the hair above the ear. They serve a dual purpose: supporting the weight of the earring and beautifying the side profile of the dancer or deity.
+        <br><a href="/collections/mattal" class="shop-link">Shop Mattal &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Bullaku" loading="lazy">
+        Bullaku
+      </dt>
+      <dd>
+        A traditional nose ornament that hangs from the septum (center of the nose). Often worn alongside side nose pins (mookuthi) for a complete classical look.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Thodu" loading="lazy">
+        Thodu (Studs)
+      </dt>
+      <dd>
+        The top part of the earring that sits on the earlobe, to which the jimikki bell is attached. In temple jewellery, these often feature oversized floral or swan designs.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-neck" class="gc-glossary-section">
+    <h2>Neck Ornaments</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Addigai" loading="lazy">
+        Addigai
+      </dt>
+      <dd>
+        A close-fitting choker necklace. It is the first/topmost layer in a bridal or dance jewellery set. Golden Collections designs Addigais with flexible links to ensure they sit comfortably on the neck.
+        <br><a href="/collections/short-necklace" class="shop-link">Shop Addigai &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Kasumalai" loading="lazy">
+        Kasumalai
+      </dt>
+      <dd>
+        Literally "Coin Garland." A necklace made of overlapping coins, usually stamped with the image of Goddess Lakshmi. It is a symbol of wealth and auspiciousness, mandatory for temple weddings and deity decoration.
+        <br><a href="/collections/kasumalai" class="shop-link">Shop Kasumalai &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Lakshmi Haaram" loading="lazy">
+        Lakshmi Haaram
+      </dt>
+      <dd>
+        A long necklace (Haaram) where the primary motif is Goddess Lakshmi, often seated on a lotus. It is considered deeply spiritual and is a favorite for Varalakshmi Vratam and bridal wear.
+        <br><a href="/collections/haaram" class="shop-link">Shop Lakshmi Haaram &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Manga Malai" loading="lazy">
+        Manga Malai
+      </dt>
+      <dd>
+        A heritage necklace featuring mango-shaped (paisley) pendants. The mango represents fertility and love in Indian culture. Our Manga Malais replicate designs found in 19th-century royal collections.
+        <br><a href="/collections/manga-malai" class="shop-link">Shop Manga Malai &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Guttapusalu" loading="lazy">
+        Guttapusalu
+      </dt>
+      <dd>
+        A classic Andhra design meaning "bunches of pearls." It features clusters of small pearls hanging from a gold frame set with rubies or emeralds. It has seen a massive resurgence in modern bridal trends.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Muthumala" loading="lazy">
+        Muthumala
+      </dt>
+      <dd>
+        A simple, elegant necklace made primarily of pearls (Muthu), often with a central gold or kemp pendant. Used frequently for Lord Krishna or Vishnu alankarams.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-waist" class="gc-glossary-section">
+    <h2>Waist &amp; Arm Ornaments</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Oddiyanam" loading="lazy">
+        Oddiyanam / Vaddanam
+      </dt>
+      <dd>
+        The waist belt. In Bharatanatyam, it helps maintain the "Araimandi" posture by supporting the back. For deities, it cinches the silk draping. Golden Collections offers adjustable Vaddanams to fit various waist sizes.
+        <br><a href="/collections/oddiyanam-vaddanam" class="shop-link">Shop Oddiyanam &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Arm Vanki" loading="lazy">
+        Arm Vanki / Bajuband
+      </dt>
+      <dd>
+        An inverted V-shaped armlet worn on the upper arm. The unique shape allows it to fit securely without sliding down during vigorous dance movements. Often features Lakshmi or peacock designs.
+        <br><a href="/collections/arm-vanki" class="shop-link">Shop Arm Vanki &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Kamarbandh" loading="lazy">
+        Kamarbandh
+      </dt>
+      <dd>
+        A general term for waist chains or belts. While Oddiyanam refers to the stiff, broad temple belt, Kamarbandh can also refer to flexible, chain-style waist jewellery used in semi-classical dance.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-hair" class="gc-glossary-section">
+    <h2>Hair &amp; Braid Ornaments</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Jada Billa" loading="lazy">
+        Jada Billa
+      </dt>
+      <dd>
+        Individual decorative round pieces arranged along the length of a long braid (Jada). A standard dance set requires 9 to 11 graduated bills, decreasing in size towards the bottom.
+        <br><a href="/collections/jada-billa" class="shop-link">Shop Jada Billa &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Kunjalam" loading="lazy">
+        Kunjalam
+      </dt>
+      <dd>
+        The decorative tassel attached to the very end of the braid. It adds length and sways beautifully with the dancer's movement. In deity decoration, three kunjalams represent the Triveni Sangam.
+        <br><a href="/collections/jada-set" class="shop-link">Shop Kunjalam &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Jada Set" loading="lazy">
+        Jada Set
+      </dt>
+      <dd>
+        A comprehensive set containing the Rakodi (top), Jada Billas (middle), and Kunjalam (end). Golden Collections offers matched sets to ensure stone colors and gold finish are uniform.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Jada Chengili" loading="lazy">
+        Jada Chengili
+      </dt>
+      <dd>
+        A gold chain that runs along the sides of the braid, or connects the Jada Billas together, securing them in place over the hair.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Savaram" loading="lazy">
+        Savaram (False Hair)
+      </dt>
+      <dd>
+        Traditional false hair extension used to create the long, thick braid required for Bharatanatyam and Kuchipudi, providing a base for the heavy jewellery.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-deity" class="gc-glossary-section">
+    <h2>Deity Alankaram</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Deity Alankaram Jewellery" loading="lazy">
+        Deity Alankaram Jewellery
+      </dt>
+      <dd>
+        Specialized jewellery crafted specifically for idols (Vigrahas). Unlike human jewellery, these pieces are sized for specific statue heights and often feature open backs or tying strings for easy adornment during Pooja.
+        <br><a href="/collections/deity-jewellery" class="shop-link">Shop Deity Jewellery &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Hastham" loading="lazy">
+        Hastham
+      </dt>
+      <dd>
+        Ornaments shaped like hands (palms) to cover the deity's hands. They often display specific Mudras like 'Abhaya Hastham' (blessing) or hold symbols like the lotus. Essential for Varalakshmi Vratam.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Patham" loading="lazy">
+        Patham
+      </dt>
+      <dd>
+        Foot coverings for the deity. Worshipping the lotus feet (Pada Pooja) is a central part of Hindu ritual, making Patham a highly sacred ornament.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Vagamalai" loading="lazy">
+        Vagamalai / Thomala
+      </dt>
+      <dd>
+        A large, garland-like structure made of metal/gold/stones that hangs from the deity's shoulders down to the feet. It mimics fresh flower garlands but is permanent and reusable.
+        <br><a href="/collections/deity-vagamalai" class="shop-link">Shop Vagamalai &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Kiritam" loading="lazy">
+        Kiritam (Crown)
+      </dt>
+      <dd>
+        The crown of the deity. Golden Collections crafts Kiritams in various sizes, often featuring the serpent hood (Naga) or temple towers (Gopuram) at the peak.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Varalakshmi Set" loading="lazy">
+        Varalakshmi Vratam Set
+      </dt>
+      <dd>
+        A pre-assembled kit containing all essentials for the Varalakshmi Pooja face/idol: Face mask, Crown, Nethi Chutti, Earring, Nosepin, and Necklaces.
+        <br><a href="/collections/varalakshmi-vratam" class="shop-link">Shop Varalakshmi Sets &rarr;</a>
+      </dd>
+    </dl>
+  </section>
+
+  <section id="gc-dance" class="gc-glossary-section">
+    <h2>Dance Accessories</h2>
+    <dl>
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Ghungroo" loading="lazy">
+        Ghungroo / Salangai
+      </dt>
+      <dd>
+        Musical anklets made of small metallic bells strung together. They accentuate the rhythmic footwork (Talam) of the dancer. We offer cotton-padded, leather, and velvet-backed ghungroos for comfort.
+        <br><a href="/collections/ghungroo" class="shop-link">Shop Ghungroo &rarr;</a>
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Dance Belt" loading="lazy">
+        Dance Belt
+      </dt>
+      <dd>
+        A supportive cloth or elastic belt worn under the costume. It provides a base to pin the Oddiyanam securely, preventing it from slipping during jumps and bends.
+      </dd>
+
+      <dt>
+        <img src="https://cdn.shopify.com/s/files/1/0764/9224/3242/files/gc-glossary-placeholder.png?v=1764325559" class="term-icon" alt="Makeup Jewellery" loading="lazy">
+        Makeup Jewellery
+      </dt>
+      <dd>
+        Refers to the smaller, stick-on or pin-on items used to define the face, such as decorative Bindis and crystal stickers used around the eyes for stage performances.
+      </dd>
+    </dl>
+  </section>
+
+  <footer class="gc-glossary__footer">
+    <p>
+      This glossary is designed to help dancers, devotees, and jewellery lovers understand the
+      heritage vocabulary behind <strong>temple jewellery</strong> and
+      <strong>classical dance ornaments</strong>. For original Bharatanatyam, Kuchipudi, and
+      deity jewellery crafted in traditional South Indian style, explore the collections at
+      <strong>Golden Collections</strong>.
+    </p>
+  </footer>
+</section>

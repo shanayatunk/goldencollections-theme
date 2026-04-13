@@ -1,0 +1,70 @@
+# ============================================================================
+# ROBOTS.TXT – GOLDEN COLLECTIONS – OPTIMIZED (Jan 2026 - Final Revision)
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# GROUP 1: BLOCK BAD BOTS & AGGRESSIVE SCRAPERS
+# Strategy: Stop bots that waste bandwidth and provide no value.
+# ----------------------------------------------------------------------------
+User-agent: CCBot                  # Common Crawl
+User-agent: MJ12bot                # Majestic-12 (Backlink crawler)
+User-agent: SemrushBot             # Excessive crawling
+User-agent: DotBot                 # Moz: excessive crawling
+Disallow: /
+
+# ----------------------------------------------------------------------------
+# GROUP 2: THE "VIP" LIST + GENERAL TRAFFIC
+# Strategy: Explicitly name Social & AI bots so they know they are welcome,
+# but force them to follow the same safety rules as everyone else.
+# ----------------------------------------------------------------------------
+User-agent: FacebookExternalHit    # WhatsApp / FB / Insta Previews
+User-agent: GPTBot                 # ChatGPT Training
+User-agent: Google-Extended        # Gemini Training
+User-agent: OAI-SearchBot          # ChatGPT Search
+User-agent: PerplexityBot          # Perplexity Search
+User-agent: ClaudeBot              # Claude (Anthropic) General
+User-agent: Claude-Web             # Claude (Anthropic) Web Browsing
+User-agent: xai-search             # Grok / xAI
+User-agent: Googlebot
+User-agent: AdsBot-Google
+User-agent: Pinterest
+User-agent: * # Everyone else falls here
+
+# --- Safety Rules (Applies to all bots above) ---
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /checkouts/
+Disallow: /checkout
+Disallow: /orders
+Disallow: /account
+Disallow: /policies/
+Disallow: /*/policies/
+Disallow: /search
+Disallow: /*?q=* # Block internal search results (Spider traps)
+
+# --- Prevent Duplicate Content (SEO Vital) ---
+Disallow: /collections/*sort_by*
+Disallow: /collections/*+*
+Disallow: /collections/*%2B*
+Disallow: /collections/*?*
+Disallow: /*/collections/* # Forces bots to use /products/ links
+
+# --- Hide Internal Previews ---
+Disallow: /*preview_theme_id*
+Disallow: /*preview_script_id*
+Disallow: /*?*oseid=*
+
+# --- ALLOW ASSETS (Explicitly allow images/scripts) ---
+Allow: /cdn/shop/*.jpg
+Allow: /cdn/shop/*.png
+Allow: /cdn/shop/*.webp
+Allow: /cdn/shop/*.gif
+Allow: /cdn/shop/*.svg
+Allow: /cdn/shop/*.css
+Allow: /cdn/shop/*.js
+
+# ----------------------------------------------------------------------------
+# XML SITEMAP
+# ----------------------------------------------------------------------------
+Sitemap: https://goldencollections.com/sitemap.xml

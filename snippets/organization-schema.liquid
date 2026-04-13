@@ -1,0 +1,56 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ shop.url }}#organization",
+      "name": "FeelOri",
+      "url": "{{ shop.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ settings.logo | image_url: width: 500 | prepend: shop.url }}"
+      },
+      "founder": "Pooja Tunk",
+      "foundingDate": "2024",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@feelori.com",
+        "telephone": "+91-9967680579",
+        "contactType": "customer support",
+        "areaServed": "IN"
+      },
+      "sameAs": [
+        "https://linktr.ee/feelori",
+        "https://www.amazon.in/Complete-Guide-Indian-Heritage-Jewelry-ebook/dp/B0FDR76SSY",
+        "https://www.amazon.com/author/poojatunk",
+        "https://medium.com/@myfeelori",
+        "https://www.quora.com/profile/Pooja-Tunk",
+        "https://in.linkedin.com/in/pooja-tunk-493647357",
+        "https://www.instagram.com/FeeloriOfficial",
+        "https://www.facebook.com/FeeloriOfficial",
+        "https://twitter.com/FeeloriOfficial",
+        "https://www.youtube.com/@FeeloriOfficial",
+        "https://in.pinterest.com/FeeloriOfficial/"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "FeelOri",
+      "image": "{{ settings.logo | image_url: width: 500 | prepend: shop.url }}",
+      "priceRange": "₹₹",
+      "telephone": "+91-9967680579",
+      "email": "support@feelori.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Plot 9, Sai Nidhi, Krishnapuri Colony, Lakshmi Nagar, West Marredpally",
+        "addressLocality": "Secunderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500026",
+        "addressCountry": "IN"
+      },
+      "url": "{{ shop.url }}"
+    }
+  ]
+}
+</script>

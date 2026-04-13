@@ -1,0 +1,136 @@
+{% comment %}
+FeelOri Jewelry Glossary
+Dynamic terms from custom.glossary_terms JSON metafield
+Includes search, A–Z index, sticky headings, back-to-top, smooth scroll, floating top button, total count & JSON-LD
+{% endcomment %}
+
+{% assign terms = page.metafields.custom.glossary_terms.value %}
+{% if terms and terms.size > 0 %}
+
+<style>
+  html { scroll-behavior: smooth; }
+
+  .feelori-glossary { margin: 3rem auto; max-width: 800px; font-family: 'Lato', sans-serif; position: relative; }
+  .feelori-glossary-heading { text-align: center; font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem; color: #111; }
+  .feelori-glossary-intro { text-align: center; color: #555; font-size: 1rem; max-width: 700px; margin: 0 auto 1rem auto; line-height: 1.6; }
+  .feelori-glossary-count { text-align: center; font-size: 0.95rem; color: #777; margin-bottom: 1.5rem; }
+  .feelori-glossary-search { display: block; width: 100%; max-width: 400px; margin: 0 auto 1rem auto; padding: 0.5rem 1rem; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+  .feelori-glossary-no-results { text-align: center; color: #999; margin-top: 1rem; font-size: 0.95rem; display: none; }
+  .feelori-glossary-index { text-align: center; margin-bottom: 2rem; flex-wrap: wrap; }
+  .feelori-glossary-index-link { display: inline-block; margin: 2px 4px; padding: 4px 6px; font-size: 0.9rem; color: #555; text-decoration: none; border-radius: 4px; transition: color 0.2s ease, background 0.2s ease; }
+  .feelori-glossary-index-link:hover { color: #fff; background: #ff4d6d; }
+  .feelori-glossary-letter {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-top: 2rem;
+    color: #111; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.3rem;
+    position: sticky; top: 60px; background: #fff; z-index: 1;
+    transition: color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .feelori-glossary-letter.stuck { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .feelori-glossary-letter:hover { color: #ff4d6d; cursor: pointer; }
+  .feelori-glossary-list dt { font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; color: #ff4d6d; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2px; }
+  .feelori-glossary-list dd { margin: 0.5rem 0 0 0; color: #333; font-size: 1rem; line-height: 1.6; }
+  .feelori-glossary-icon { color: #ff4d6d; margin-right: 4px; }
+  .feelori-glossary-back { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: #ff4d6d; text-decoration: none; }
+  .feelori-glossary-back:hover { text-decoration: underline; }
+
+  /* Floating ↑ Top button on mobile */
+  .feelori-glossary-float-top {
+    position: fixed; bottom: 20px; right: 20px;
+    background: #ff4d6d; color: #fff;
+    padding: 8px 10px; border-radius: 50%;
+    font-size: 1.2rem; text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 999;
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .feelori-glossary-float-top { display: block; }
+  }
+</style>
+
+<div id="top" class="feelori-glossary page-width">
+  <h1 class="feelori-glossary-heading">Jewelry Glossary</h1>
+  <p class="feelori-glossary-intro">
+    Discover FeelOri’s curated glossary of Indian heritage jewelry terms. From Kundan to Jadau and CZ, explore the artistry and culture behind every word in our collection.
+  </p>
+  <p class="feelori-glossary-count">Total terms: {{ terms.size }}</p>
+
+  <input type="text" id="glossary-search" placeholder="Search terms..." class="feelori-glossary-search">
+  <div id="no-results" class="feelori-glossary-no-results">No results found.</div>
+
+  <div class="feelori-glossary-index">
+    {% assign alphabet = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' %}
+    {% for letter in alphabet %}
+      <a href="#letter-{{ letter }}" class="feelori-glossary-index-link">{{ letter }}</a>
+    {% endfor %}
+  </div>
+
+  <dl class="feelori-glossary-list">
+    {% assign previous_letter = '' %}
+    {% for term in terms %}
+      {% assign first_letter = term.name | slice: 0, 1 | upcase %}
+      {% if first_letter != previous_letter %}
+        <h3 id="letter-{{ first_letter }}" class="feelori-glossary-letter">{{ first_letter }}</h3>
+        <a href="#top" class="feelori-glossary-back">↑ Back to top</a>
+        {% assign previous_letter = first_letter %}
+      {% endif %}
+      <dt><span class="feelori-glossary-icon">✦</span> {{ term.name }}</dt>
+      <dd>{{ term.description }}</dd>
+    {% endfor %}
+  </dl>
+</div>
+
+<a href="#top" class="feelori-glossary-float-top" aria-label="Back to top">↑</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var searchInput = document.getElementById('glossary-search');
+  var noResults = document.getElementById('no-results');
+  var dts = document.querySelectorAll('.feelori-glossary-list dt');
+
+  // Search filter
+  searchInput.addEventListener('keyup', function() {
+    var filter = this.value.toLowerCase();
+    var matchCount = 0;
+    dts.forEach(function(dt) {
+      var dd = dt.nextElementSibling;
+      var text = dt.textContent.toLowerCase() + ' ' + dd.textContent.toLowerCase();
+      if (text.includes(filter)) {
+        dt.style.display = ''; dd.style.display = '';
+        matchCount++;
+      } else {
+        dt.style.display = 'none'; dd.style.display = 'none';
+      }
+    });
+    noResults.style.display = matchCount === 0 ? 'block' : 'none';
+  });
+
+  // Sticky letter shadow
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if(entry.intersectionRatio < 1) {
+        entry.target.classList.add('stuck');
+      } else {
+        entry.target.classList.remove('stuck');
+      }
+    });
+  }, { threshold: [1] });
+  document.querySelectorAll('.feelori-glossary-letter').forEach(el => observer.observe(el));
+});
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "FeelOri Jewelry Glossary",
+  "url": "{{ shop.url }}{{ page.url }}",
+  "hasDefinedTerm": [
+    {% for term in terms %}
+    { "@type": "DefinedTerm", "name": "{{ term.name | escape }}", "description": "{{ term.description | strip_html | escape }}" }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+{% endif %}

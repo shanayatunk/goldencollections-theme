@@ -1,0 +1,114 @@
+{% comment %}
+  Golden Collections – Blog Post FAQ Accordion + FAQPage Schema (Heritage Edition)
+  Snippet: blog-faq-accordion.liquid
+{% endcomment %}
+
+{% assign faqs = article.metafields.custom.blog_faqs.value %}
+
+{% if faqs and faqs.size > 0 %}
+  <style>
+    .gc-blog-faq-container {
+      margin: 4rem auto;
+      max-width: 900px;
+      padding: 3rem 2rem;
+      border-top: 4px solid #D3BC69;                /* Antique Gold */
+      background: #faf8f5;                          /* Warm cream */
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .gc-blog-faq-container h2 {
+      text-align: center;
+      font-family: 'New York', 'Times New Roman', serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: #2c2c2c;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.5px;
+    }
+    .gc-blog-faq details {
+      margin-bottom: 1.2rem;
+      background: #fffdf9;
+      border: 1px solid #e8dcc1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .gc-blog-faq summary {
+      padding: 1.4rem 1.6rem;
+      font-family: 'New York', 'Times New Roman', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #2c2c2c;
+      transition: all 0.3s ease;
+    }
+    .gc-blog-faq summary:hover {
+      color: #D3BC69;
+      background: #fffaf0;
+    }
+    .gc-blog-faq summary::-webkit-details-marker { display: none; }
+    .gc-faq-icon {
+      font-size: 2rem;
+      color: #D3BC69;
+      transition: transform 0.3s ease;
+    }
+    details[open] .gc-faq-icon { transform: rotate(45deg); }
+    .gc-blog-faq-answer {
+      padding: 0 1.6rem 1.8rem;
+      line-height: 1.88;
+      color: #444;
+      font-family: 'New York', 'Times New Roman', serif;
+      font-size: 1.2rem;
+    }
+    .gc-blog-faq-answer a {
+      color: #D3BC69;
+      text-decoration: underline;
+    }
+    @media (max-width: 749px) {
+      .gc-blog-faq-container { padding: 2rem 1rem; margin: 3rem auto; }
+      .gc-blog-faq-container h2 { font-size: 2.1rem; }
+      .gc-blog-faq summary { font-size: 1.25rem; padding: 1.2rem 1.2rem; }
+    }
+  </style>
+
+  <div class="gc-blog-faq-container page-width">
+    <h2>Frequently Asked Questions</h2>
+    <div class="gc-blog-faq">
+      {% for faq in faqs %}
+        <details>
+          <summary>
+            {{ faq.question }}
+            <span class="gc-faq-icon">+</span>
+          </summary>
+          <div class="gc-blog-faq-answer rte">
+            {{ faq.answer }}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in faqs %}
+      {
+        "@type": "Question",
+        "name": {{ faq.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ faq.answer | strip_html | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+{% endif %}
+
+

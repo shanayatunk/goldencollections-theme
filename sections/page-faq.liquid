@@ -1,0 +1,143 @@
+{%- comment -%}
+  Golden Collections – Dedicated FAQ Page (New York Typeface – 64-Year Legacy)
+  SEO: temple jewellery Secunderabad, Bharatanatyam jewellery Hyderabad, handcrafted temple jewellery India, real Kemp stone temple jewellery, South Indian temple jewellery online, temple jewellery store Secunderabad, India
+  Our Heritage Store & Design Atelier in Secunderabad handles design, quality, finishing, and curation, while the actual crafting is executed by select master artisans under our strict guidance.
+{%- endcomment -%}
+
+{% if template == 'page' and page.handle == 'faq' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Golden Collections?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Golden Collections is India’s oldest specialist in authentic temple jewellery, Bharatanatyam & Kuchipudi dance ornaments, and deity alankaram sets. Founded in 1961 by Shri Lakshman Tunk in Secunderabad, continued by his son Shri Ashok Tunk, and now led by third-generation artisan Anil Tunk." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who founded Golden Collections?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Founded in 1961 by Shri Lakshman Tunk in Secunderabad. Now in its third generation under Anil Tunk, continuing a 64-year family legacy in traditional South Indian temple jewellery online." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is your temple jewellery handmade?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every piece is 100% handcrafted temple jewellery India treasures using traditional brass, rich gold plating, and real Kemp stone temple jewellery, following exact 19th-century Tanjore and Kerala temple patterns from our temple jewellery store Secunderabad, India." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you ship internationally?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, we ship worldwide via DHL/FedEx express (3–7 days) with full insurance and tracking for all Bharatanatyam dance jewellery sets and deity alankaram sets." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is Golden Collections located?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sai Nidhi, Plot 9, Krishnapuri Colony, West Marredpally, Secunderabad, Telangana 500026, India – the only heritage store for temple jewellery Secunderabad devotees trust." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between temple jewellery and regular gold jewellery?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Temple jewellery is created to adorn Hindu deities and classical dancers – featuring deity motifs, red-green Kemp stones, and antique finish. Regular gold jewellery is designed for daily wear and investment." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I care for my temple jewellery?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Store in airtight box with silica gel. Avoid perfume/water. Clean with soft microfiber cloth. Lifetime free re-polishing at our Secunderabad atelier for all handcrafted temple jewellery India pieces." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customise a Bharatanatyam set?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes – full customisation of all 12–15 pieces (size, motifs, stone colours, plating thickness) for Bharatanatyam jewellery Hyderabad dancers. Most visit our store for personal fitting." }
+    },
+    {
+      "@type": "Question",
+      "name": "What materials do you use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Brass base with 22K gold plating and genuine Kemp stones. No compromises – only the finest for deity alankaram sets and South Indian temple jewellery online." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer deity jewellery for temples?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, we have supplied deity alankaram sets to major South Indian temples for 64 years. Custom crowns, harams, and ornaments from our Heritage Store & Design Atelier in Secunderabad." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": { "@type": "Answer", "text": "7-day returns for unused items. Custom pieces like Bharatanatyam dance jewellery sets are non-returnable but come with lifetime support." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does crafting take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Stock items ship in 2–3 days. Custom real Kemp stone temple jewellery takes 15–30 days, crafted under strict guidance in Secunderabad." }
+    }
+  ]
+}
+</script>
+{% endif %}
+
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Golden Collections – correct New York typography */
+  .gc-faq-page h2 {
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: 3.4rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.5px;
+  }
+  .gc-faq-page .rte {
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: 1.3rem;
+    line-height: 1.88;
+    color: #444;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient gc-faq-page">
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <h2 class="page-title {{ section.settings.heading_size }}">
+      {{ section.settings.page.title | default: 'Frequently Asked Questions' }}
+    </h2>
+    <div class="rte">
+      {{ section.settings.page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GC FAQ Page",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "page", "id": "page", "label": "FAQ Content Page" },
+    { "type": "select", "id": "heading_size", "default": "h1", "label": "Heading size", "options": [
+      { "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" },
+      { "value": "h0", "label": "Large" }, { "value": "hxl", "label": "Extra Large" },
+      { "value": "hxxl", "label": "Maximum" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 80 }
+  ],
+  "presets": [{ "name": "GC FAQ Page" }]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_dKcfbJ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GYCYy7": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ collection.title }}",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GYCYy7"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "rich_text_dKcfbJ",
+    "product-grid",
+    "banner"
+  ]
+}

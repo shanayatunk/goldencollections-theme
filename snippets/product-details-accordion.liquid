@@ -1,0 +1,120 @@
+{%- comment -%}
+  Unified Product Information Accordion
+  Renders: Product Description, Product Details, Care Instructions, Styling Tips, Promise, Heritage
+{%- endcomment -%}
+
+{% assign details = product.metafields.custom.product_details.value %}
+
+<div class="product-accordions" style="margin: 2rem 0;">
+
+  {%- comment -%} 1. Product Description Accordion {%- endcomment -%}
+  {% if product.description != blank %}
+  <details class="product-description-accordion" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: white;">
+    <summary style="cursor: pointer; font-weight: 600; font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; color: #111827;">
+      <span style="font-size: 1.25rem;">📝</span>
+      Product Description
+    </summary>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; color: #374151; line-height: 1.6;">
+      {{ product.description }}
+    </div>
+  </details>
+  {% endif %}
+
+  {%- comment -%} 2. Product Details Accordion (Technical Specs) {%- endcomment -%}
+  {% if details %}
+  <details class="product-details-accordion" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: white;">
+    <summary style="cursor: pointer; font-weight: 600; font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; color: #111827;">
+      <span style="font-size: 1.25rem;">✨</span>
+      Product Details
+    </summary>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; color: #374151; line-height: 1.6;">
+      
+      {%- if details.material -%}
+      <div style="margin-bottom: 1rem;">
+        <strong style="color: #111827;">Material:</strong>
+        <span>{{ details.material }}</span>
+      </div>
+      {%- endif -%}
+      
+      {%- if details.package_includes -%}
+      <div style="margin-bottom: 1rem;">
+        <strong style="color: #111827;">Package Includes:</strong>
+        <span>{{ details.package_includes }}</span>
+      </div>
+      {%- endif -%}
+      
+      {%- if details.country_of_origin -%}
+      <div style="margin-bottom: 1rem;">
+        <strong style="color: #111827;">Country of Origin:</strong>
+        <span>{{ details.country_of_origin }}</span>
+      </div>
+      {%- endif -%}
+      
+      {%- if details.key_usp and details.key_usp.size > 0 -%}
+      <div>
+        <strong style="color: #111827;">Key Features:</strong>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem; list-style: disc;">
+          {%- for usp in details.key_usp -%}
+          <li style="margin-bottom: 0.25rem;">{{ usp }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+      
+    </div>
+  </details>
+  {% endif %}
+
+  {%- comment -%} 3. Jewelry Care Instructions Accordion {%- endcomment -%}
+  {% if details.care_instructions %}
+  <details class="care-accordion" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: #fef2f2;">
+    <summary style="cursor: pointer; font-weight: 600; font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; color: #991b1b;">
+      <span style="font-size: 1.25rem;">💎</span>
+      Jewelry Care Instructions
+    </summary>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #fecaca; color: #7f1d1d; line-height: 1.6;">
+      {{ details.care_instructions }}
+    </div>
+  </details>
+  {% endif %}
+
+  {%- comment -%} 4. Styling Tips Accordion {%- endcomment -%}
+  {% if details.styling_tip %}
+  <details class="styling-accordion" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: #fef3c7;">
+    <summary style="cursor: pointer; font-weight: 600; font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; color: #78350f;">
+      <span style="font-size: 1.25rem;">💡</span>
+      Styling Tips
+    </summary>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #fde68a; color: #92400e; line-height: 1.6;">
+      {{ details.styling_tip }}
+    </div>
+  </details>
+  {% endif %}
+
+  {%- comment -%} 5. FeelOri Promise Accordion {%- endcomment -%}
+  {% if details.feelori_promise %}
+  <details class="promise-accordion" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: #ecfccb;">
+    <summary style="cursor: pointer; font-weight: 600; font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; color: #365314;">
+      <span style="font-size: 1.25rem;">✓</span>
+      FeelOri Promise
+    </summary>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #d9f99d; color: #3f6212; line-height: 1.6;">
+      {{ details.feelori_promise }}
+    </div>
+  </details>
+  {% endif %}
+
+  {%- comment -%} 6. Our Heritage Accordion {%- endcomment -%}
+  {% if details.feelori_heritage %}
+  <details class="heritage-accordion" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: #dbeafe;">
+    <summary style="cursor: pointer; font-weight: 600; font-size: 1.125rem; display: flex; align-items: center; gap: 0.5rem; color: #1e3a8a;">
+      <span style="font-size: 1.25rem;">🏛️</span>
+      Our Heritage
+    </summary>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #bfdbfe; color: #1e40af; line-height: 1.6;">
+      {{ details.feelori_heritage }}
+    </div>
+  </details>
+  {% endif %}
+
+</div>
