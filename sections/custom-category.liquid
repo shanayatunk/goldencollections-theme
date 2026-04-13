@@ -11,7 +11,11 @@
         <a href="{{ collection.url }}" class="category-item">
           <div class="category-circle">
             {% if collection.image %}
-              <img src="{{ collection.image | img_url: '200x200' }}" alt="{{ collection.title }}">
+              {{
+                collection.image
+                | image_url: width: 200, height: 200, crop: 'center'
+                | image_tag: alt: collection.title, width: 200, height: 200, loading: 'lazy'
+              }}
             {% else %}
               <div class="category-placeholder">{{ collection.title | slice: 0,1 }}</div>
             {% endif %}
