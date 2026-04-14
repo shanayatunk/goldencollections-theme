@@ -36,212 +36,23 @@
   }
 {%- endstyle -%}
 
-
-{% comment %}
-  ============================================================
-  Start: Hierarchical Sub-Collection Navigation (NO MENUS!)
-  ============================================================
-  - Shows parent collection with its direct children only
-  - Supports multi-level hierarchy (grandparent → parent → children)
-  - NO navigation menus required!
-  
-  Required Collection Metafield (Settings → Custom Data → Collections):
-  
-  - Namespace: custom
-  - Key: parent_menu_handles
-  - Type: Single line text
-  - Usage:
-    * TOP-LEVEL collections (Earrings): Leave empty
-    * MID-LEVEL collections (Studs): Set to "feelori-earrings"
-    * BOTTOM-LEVEL collections (CZ Studs): Set to "studs"
-  
-  Optional Metafields:
-  - Namespace: custom
-  - Key: display_title
-  - Type: Single line text
-  
-  - Namespace: custom
-  - Key: sort_order
-  - Type: Number (integer)
-  - Usage: Set numbers like 1, 2, 3 to control display order
-  - Lower numbers appear first (1 = first, 2 = second, etc.)
-  - Collections without sort_order appear last, sorted alphabetically
-  
-  Example Structure:
-  - Earrings (no parent) → shows: Earrings, Studs, Hoops
-  - Studs (parent: feelori-earrings) → shows: Studs, Jado Studs, CZ Studs
-  - CZ Studs (parent: studs) → shows: Studs, Jado Studs, CZ Studs
-  
-  Logic:
-  1. If collection has no parent → it's a top-level parent, show its direct children
-  2. If collection has a parent → show that parent + all its direct children (siblings)
-{% endcomment %}
-
-{%- liquid
-  assign show_sub_nav = false
-  assign display_parent_collection = blank
-  assign all_collection_handles = blank
-  
-  comment
-    Check if current collection has a parent
-  endcomment
-  assign my_parent_handle_raw = collection.metafields.custom.parent_menu_handles
-  
-  if my_parent_handle_raw != blank
-    comment
-      This collection HAS a parent
-      Check if current collection has children - if yes, show only children
-      If no children, show siblings (other children of parent)
-    endcomment
-    assign parent_handles_array = my_parent_handle_raw | split: ','
-    assign my_parent_handle = parent_handles_array[0] | strip
-    
-    comment
-      First check if CURRENT collection has children
-    endcomment
-    assign all_collection_handles = blank
-    assign has_own_children = false
-    
-    for col in collections
-      assign col_parent_raw = col.metafields.custom.parent_menu_handles
-      if col_parent_raw != blank
-        assign col_parents_array = col_parent_raw | split: ','
-        assign col_first_parent = col_parents_array[0] | strip
-        if col_first_parent == collection.handle
-          if all_collection_handles == blank
-            assign all_collection_handles = col.handle
-          else
-            assign all_collection_handles = all_collection_handles | append: ',' | append: col.handle
-          endif
-          assign has_own_children = true
-        endif
-      endif
-    endfor
-    
-    if has_own_children
-      comment
-        Current collection has children - show only those children
-      endcomment
-      assign show_sub_nav = true
-    else
-      comment
-        Current collection has NO children - show siblings (children of parent)
-      endcomment
-      assign display_parent_collection = collections[my_parent_handle]
-      
-      if display_parent_collection != blank
-        for col in collections
-          assign col_parent_raw = col.metafields.custom.parent_menu_handles
-          if col_parent_raw != blank
-            assign col_parents_array = col_parent_raw | split: ','
-            assign col_first_parent = col_parents_array[0] | strip
-            if col_first_parent == my_parent_handle
-              if all_collection_handles == blank
-                assign all_collection_handles = col.handle
-              else
-                assign all_collection_handles = all_collection_handles | append: ',' | append: col.handle
-              endif
-            endif
-          endif
-        endfor
-        assign show_sub_nav = true
-      endif
-    endif
-  else
-    comment
-      This collection has NO parent - it's a top-level parent
-      Show only its direct children
-    endcomment
-    assign all_collection_handles = blank
-    assign found_children = false
-    
-    for col in collections
-      assign col_parent_raw = col.metafields.custom.parent_menu_handles
-      if col_parent_raw != blank
-        assign col_parents_array = col_parent_raw | split: ','
-        assign col_first_parent = col_parents_array[0] | strip
-        if col_first_parent == collection.handle
-          if all_collection_handles == blank
-            assign all_collection_handles = col.handle
-          else
-            assign all_collection_handles = all_collection_handles | append: ',' | append: col.handle
-          endif
-          assign found_children = true
-        endif
-      endif
-    endfor
-    
-    if found_children
-      assign show_sub_nav = true
-    endif
-  endif
--%}
-
-{%- if show_sub_nav and all_collection_handles != blank -%}
+{%- assign subcollection_menu = linklists[section.settings.subcollection_menu] -%}
+{%- if subcollection_menu != blank and subcollection_menu.links.size > 0 -%}
   <div class="subcollection-nav-wrapper page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <h2 class="subcollection-nav-title visually-hidden">{{ 'sections.collection_template.subcollections' | t: default: 'Related Collections' }}</h2>
     <ul class="subcollection-nav list-unstyled" role="list">
-      {%- assign handles_array = all_collection_handles | split: ',' -%}
-      
-      {%- comment -%}
-        Build array of collections with their sort_order for sorting
-      {%- endcomment -%}
-      {%- assign sortable_collections = '' -%}
-      {%- for handle in handles_array -%}
-        {%- assign handle_clean = handle | strip -%}
-        {%- assign nav_collection = collections[handle_clean] -%}
-        
-        {%- if nav_collection != blank -%}
-          {%- assign sort_order = nav_collection.metafields.custom.sort_order | default: 9999 -%}
-          {%- assign nav_title = nav_collection.metafields.custom.display_title | default: nav_collection.title -%}
-          
-          {%- comment -%}
-            Format: sort_order|handle|title
-            Pad sort_order to 5 digits for proper string sorting
-          {%- endcomment -%}
-          {%- if sort_order < 10 -%}
-            {%- assign padded_order = '0000' | append: sort_order -%}
-          {%- elsif sort_order < 100 -%}
-            {%- assign padded_order = '000' | append: sort_order -%}
-          {%- elsif sort_order < 1000 -%}
-            {%- assign padded_order = '00' | append: sort_order -%}
-          {%- elsif sort_order < 10000 -%}
-            {%- assign padded_order = '0' | append: sort_order -%}
-          {%- else -%}
-            {%- assign padded_order = sort_order -%}
-          {%- endif -%}
-          
-          {%- assign collection_data = padded_order | append: '|' | append: handle_clean | append: '|' | append: nav_title -%}
-          
-          {%- if sortable_collections == blank -%}
-            {%- assign sortable_collections = collection_data -%}
-          {%- else -%}
-            {%- assign sortable_collections = sortable_collections | append: ',' | append: collection_data -%}
-          {%- endif -%}
-        {%- endif -%}
-      {%- endfor -%}
-      
-      {%- comment -%}
-        Sort the collections and display
-      {%- endcomment -%}
-      {%- assign sorted_collections = sortable_collections | split: ',' | sort -%}
-      
-      {%- for collection_data in sorted_collections -%}
-        {%- assign data_parts = collection_data | split: '|' -%}
-        {%- assign handle_clean = data_parts[1] -%}
-        {%- assign nav_collection = collections[handle_clean] -%}
-        
+      {%- for menu_link in subcollection_menu.links -%}
+        {%- assign nav_collection = menu_link.object -%}
         {%- if nav_collection != blank -%}
           {%- liquid
             assign nav_title = nav_collection.metafields.custom.display_title | default: nav_collection.title
             assign nav_image = nav_collection.featured_image | default: nav_collection.products.first.featured_media.preview_image
             assign nav_title = nav_title | truncate: 60
             assign is_current = false
-            if handle_clean == collection.handle
+            if nav_collection.handle == collection.handle
               assign is_current = true
             endif
           -%}
-          
           <li class="subcollection-item">
             <a
               href="{{ nav_collection.url }}"
@@ -254,7 +65,11 @@
                     srcset="{{ nav_image | image_url: width: 150 }} 150w, {{ nav_image | image_url: width: 300 }} 300w"
                     src="{{ nav_image | image_url: width: 150 }}"
                     alt="{{ nav_image.alt | default: nav_title | escape }}"
-                    class="subcollection-image" loading="lazy" width="150" height="{{ 150 | divided_by: nav_image.aspect_ratio | round }}">
+                    class="subcollection-image"
+                    loading="lazy"
+                    width="150"
+                    height="{{ 150 | divided_by: nav_image.aspect_ratio | round }}"
+                  >
                 {%- else -%}
                   <div class="subcollection-image-placeholder">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
                 {%- endif -%}
@@ -267,16 +82,6 @@
     </ul>
   </div>
 {%- endif -%}
-{% comment %}
-  ============================================================
-  End: Hierarchical Sub-Collection Navigation
-  ============================================================
-{% endcomment %}
-
-
-
-
-
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
@@ -520,6 +325,11 @@
       "label": "t:sections.all.colors.label",
       "info": "t:sections.all.colors.has_cards_info",
       "default": "scheme-1"
+    },
+    {
+      "type": "link_list",
+      "id": "subcollection_menu",
+      "label": "Subcollection navigation menu"
     },
     {
       "type": "header",
