@@ -87,7 +87,7 @@
           "type": "slide",
           "settings": {
             "image_overlay_opacity": 20,
-            "heading": "<strong>Feelori Earrings</strong>",
+            "heading": "<strong>Earrings</strong>",
             "heading_size": "h1",
             "subheading": "Our handcrafted Indian earrings, including stunning Jhumka, Chandbali, Hanging, Bali Hoop, and Stud designs.",
             "button_label": "Shop Now",
@@ -104,9 +104,9 @@
           "type": "slide",
           "settings": {
             "image_overlay_opacity": 20,
-            "heading": "<strong>Feelori Bangles</strong>",
+            "heading": "<strong>Bangles</strong>",
             "heading_size": "h2",
-            "subheading": "Explore FeelOri’s handcrafted bangles - Lightweight, elegant designs for every occasion, from weddings to daily wear.",
+            "subheading": "Explore handcrafted bangles - lightweight, elegant designs for every occasion, from weddings to daily wear.",
             "button_label": "Shop Now",
             "link": "shopify://collections/feelori-bangles-cz-kada-gold-plated-pearls",
             "button_style_secondary": false,
@@ -121,9 +121,9 @@
           "type": "slide",
           "settings": {
             "image_overlay_opacity": 20,
-            "heading": "<strong>Feelori Hair Extensions</strong>",
+            "heading": "<strong>Hair Extensions</strong>",
             "heading_size": "h2",
-            "subheading": "Transform your look with FeelOri’s Hair Extensions—crafted from 100% human hair by artisans with over 65 years of expertise. ",
+            "subheading": "Transform your look with hair extensions crafted from 100% human hair by artisans with over 65 years of expertise.",
             "button_label": "Shop Now",
             "link": "shopify://collections/hair-extensions-feel-original-with-human-hair-glamour-feelori",
             "button_style_secondary": false,
@@ -576,7 +576,7 @@
         "column_EeDzkG"
       ],
       "settings": {
-        "title": "Why Choose GoldenCollections?",
+        "title": "Why Choose Golden Collections?",
         "heading_size": "h2",
         "image_width": "half",
         "image_ratio": "adapt",
@@ -617,7 +617,7 @@
           "type": "column",
           "settings": {
             "title": "Easy Returns",
-            "text": "<p>GoldenCollections ensures premium quality with best Simple process for transit-damaged items. See our <a href=\"/policies/refund-policy\" target=\"_blank\" title=\"Refund Policy\">policy</a>.</p>",
+            "text": "<p>Golden Collections ensures premium quality with a simple process for transit-damaged items. See our <a href=\"/policies/refund-policy\" target=\"_blank\" title=\"Refund Policy\">policy</a>.</p>",
             "link_label": "",
             "link": ""
           }
@@ -639,7 +639,7 @@
         "column_ETEnRB"
       ],
       "settings": {
-        "title": "Shop GoldenCollections With Confidence",
+        "title": "Shop Golden Collections With Confidence",
         "heading_size": "h2",
         "image_width": "half",
         "image_ratio": "adapt",
@@ -766,7 +766,7 @@
         "change_slides_speed": 5,
         "image_behavior": "none",
         "show_text_below": true,
-        "accessibility_info": "Slideshow about Feelori Customer Review"
+        "accessibility_info": "Slideshow about customer reviews"
       }
     },
     "newsletter_7X8gkK": {

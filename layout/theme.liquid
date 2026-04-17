@@ -20,11 +20,15 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- liquid
+      assign normalized_page_title = page_title | downcase | replace: ' ', ''
+      assign normalized_shop_name = shop.name | downcase | replace: ' ', ''
+    -%}
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless normalized_page_title contains normalized_shop_name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
     {% if page_description %}
