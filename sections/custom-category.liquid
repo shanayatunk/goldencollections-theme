@@ -3,6 +3,12 @@
 {% endcomment %}
 
 <div class="custom-category-section" style="padding: {{ section.settings.custom_padding }};">
+  {% if section.settings.intro_text != blank %}
+    <div class="category-intro rte">
+      {{ section.settings.intro_text }}
+    </div>
+  {% endif %}
+
   <h2 class="category-title">{{ section.settings.title }}</h2>
   <div class="category-grid">
     {% for block in section.blocks %}
@@ -36,6 +42,11 @@
       "id": "title",
       "label": "Section Title",
       "default": "Shop by Category"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro Text (SEO)"
     },
     {
       "type": "range",
