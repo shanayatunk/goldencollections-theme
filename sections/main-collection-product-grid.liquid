@@ -47,7 +47,11 @@
 {%- endif -%}
 
 {%- assign subcollection_menu = linklists[section.settings.subcollection_menu] -%}
-{%- if has_node_children or (subcollection_menu != blank and subcollection_menu.links.size > 0) -%}
+{%- assign has_menu_children = false -%}
+{%- if subcollection_menu != blank and subcollection_menu.links.size > 0 -%}
+  {%- assign has_menu_children = true -%}
+{%- endif -%}
+{%- if has_node_children or has_menu_children -%}
   <div class="subcollection-nav-wrapper page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <h2 class="subcollection-nav-title visually-hidden">{{ 'sections.collection_template.subcollections' | t: default: 'Related Collections' }}</h2>
     <ul class="subcollection-nav list-unstyled" role="list">
