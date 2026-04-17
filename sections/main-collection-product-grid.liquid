@@ -53,7 +53,7 @@
 {%- endif -%}
 {%- if has_node_children or has_menu_children -%}
   <div class="subcollection-nav-wrapper page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <h2 class="subcollection-nav-title visually-hidden">{{ 'sections.collection_template.subcollections' | t: default: 'Related Collections' }}</h2>
+    <h2 class="subcollection-nav-title visually-hidden">Related collections</h2>
     <ul class="subcollection-nav list-unstyled" role="list">
       {%- if has_node_children -%}
         {%- for child_node in node_children -%}

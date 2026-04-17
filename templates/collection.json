@@ -14,12 +14,12 @@
       "blocks": {
         "heading_GYCYy7": {
           "type": "heading",
-          "settings": {
-            "heading": "{{ collection.title }}",
-            "heading_size": "h1"
-          }
+        "settings": {
+          "heading": "{{ collection.title }}",
+          "heading_size": "h2"
         }
-      },
+      }
+    },
       "block_order": [
         "heading_GYCYy7"
       ],
