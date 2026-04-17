@@ -1,0 +1,132 @@
+{%- comment -%}
+  SEO/GenAI taxonomy rendering layer.
+  Additive only: reads taxonomy metafields and prints semantic HTML blocks when data exists.
+{%- endcomment -%}
+
+{%- liquid
+  assign product_type_system = product.metafields.custom.product_type_system.value | default: product.metafields.custom.product_type_system
+  assign primary_type_ref = product.metafields.custom.primary_type_ref.value
+  assign primary_entity_ref = product.metafields.custom.primary_entity_ref.value
+  assign size_compatibility_refs = product.metafields.custom.size_compatibility.value
+
+  assign primary_type_name = primary_type_ref.name.value | default: primary_type_ref.name | default: primary_type_ref.display_name | default: primary_type_ref.handle
+  assign primary_entity_name = primary_entity_ref.name.value | default: primary_entity_ref.name | default: primary_entity_ref.display_name | default: primary_entity_ref.handle
+
+  assign entity_use_cases = primary_entity_ref.primary_use_cases.value | default: primary_entity_ref.primary_use_cases
+  assign type_use_context = primary_type_ref.use_context.value | default: primary_type_ref.use_context
+  assign material_hint = primary_type_ref.material_hint.value | default: primary_type_ref.material_hint
+  assign visual_style = primary_type_ref.visual_style.value | default: primary_type_ref.visual_style
+
+  assign has_identity = false
+  if product_type_system != blank or primary_type_name != blank or primary_entity_name != blank
+    assign has_identity = true
+  endif
+
+  assign has_use_case = false
+  if entity_use_cases != blank or type_use_context != blank
+    assign has_use_case = true
+  endif
+
+  assign has_compatibility = false
+  if size_compatibility_refs != blank
+    assign has_compatibility = true
+  endif
+
+  assign has_material_style = false
+  if material_hint != blank or visual_style != blank
+    assign has_material_style = true
+  endif
+
+  assign has_any_taxonomy_block = false
+  if has_identity or has_use_case or has_compatibility or has_material_style
+    assign has_any_taxonomy_block = true
+  endif
+-%}
+
+{%- if has_any_taxonomy_block -%}
+  <section class="product-taxonomy-layer rte" data-taxonomy-layer>
+    {%- if has_identity -%}
+      <div class="product-taxonomy-layer__block" data-taxonomy-block="identity">
+        <h2>Identity</h2>
+        <p>
+          {%- if product_type_system != blank -%}
+            <strong>Product system:</strong> {{ product_type_system | replace: '_', ' ' | capitalize }}.
+          {%- endif -%}
+          {%- if primary_type_name != blank -%}
+            <strong>Type:</strong> {{ primary_type_name }}.
+          {%- endif -%}
+          {%- if primary_entity_name != blank -%}
+            <strong>Primary entity:</strong> {{ primary_entity_name }}.
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+
+    {%- if has_use_case -%}
+      <div class="product-taxonomy-layer__block" data-taxonomy-block="use-case">
+        <h2>Use Case</h2>
+
+        {%- if entity_use_cases != blank -%}
+          <p><strong>Entity use cases:</strong></p>
+          <ul>
+            {%- for item in entity_use_cases -%}
+              <li>{{ item }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if type_use_context != blank -%}
+          <p><strong>Context:</strong></p>
+          <ul>
+            {%- for item in type_use_context -%}
+              <li>{{ item }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if has_compatibility -%}
+      <div class="product-taxonomy-layer__block" data-taxonomy-block="compatibility">
+        <h2>Compatibility</h2>
+        <ul>
+          {%- for profile in size_compatibility_refs -%}
+            {%- assign profile_name = profile.name.value | default: profile.name | default: profile.display_name | default: profile.handle -%}
+            {%- assign recommended_for = profile.recommended_for.value | default: profile.recommended_for -%}
+            <li>
+              {%- if profile_name != blank -%}
+                <strong>{{ profile_name }}:</strong>
+              {%- endif -%}
+              {{ recommended_for | default: 'Compatible size profile available.' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if has_material_style -%}
+      <div class="product-taxonomy-layer__block" data-taxonomy-block="material-style">
+        <h2>Material &amp; Style</h2>
+
+        {%- if material_hint != blank -%}
+          <p><strong>Material hints:</strong></p>
+          <ul>
+            {%- for item in material_hint -%}
+              <li>{{ item }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if visual_style != blank -%}
+          <p><strong>Visual styles:</strong></p>
+          <ul>
+            {%- for item in visual_style -%}
+              <li>{{ item }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+

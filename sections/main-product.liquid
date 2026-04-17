@@ -236,6 +236,7 @@
                 {%- if product.metafields.custom.product_details -%}
                   {% render 'product-details-accordion' %}
                 {%- endif -%}
+                {% render 'product-taxonomy-layer' %}
 
               {%- when 'sku' -%}
                 <p
