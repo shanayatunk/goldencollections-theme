@@ -36,49 +36,85 @@
   }
 {%- endstyle -%}
 
+{%- assign current_node = collection.metafields.custom.category_node_ref.value -%}
+{%- assign node_children = blank -%}
+{%- if current_node != blank -%}
+  {%- assign node_children = current_node.children.value | default: current_node.children -%}
+{%- endif -%}
+{%- assign has_node_children = false -%}
+{%- if node_children != blank and node_children.size > 0 -%}
+  {%- assign has_node_children = true -%}
+{%- endif -%}
+
 {%- assign subcollection_menu = linklists[section.settings.subcollection_menu] -%}
-{%- if subcollection_menu != blank and subcollection_menu.links.size > 0 -%}
+{%- if has_node_children or (subcollection_menu != blank and subcollection_menu.links.size > 0) -%}
   <div class="subcollection-nav-wrapper page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <h2 class="subcollection-nav-title visually-hidden">{{ 'sections.collection_template.subcollections' | t: default: 'Related Collections' }}</h2>
     <ul class="subcollection-nav list-unstyled" role="list">
-      {%- for menu_link in subcollection_menu.links -%}
-        {%- assign nav_collection = menu_link.object -%}
-        {%- if nav_collection != blank -%}
+      {%- if has_node_children -%}
+        {%- for child_node in node_children -%}
           {%- liquid
-            assign nav_title = nav_collection.metafields.custom.display_title | default: nav_collection.title
-            assign nav_image = nav_collection.featured_image | default: nav_collection.products.first.featured_media.preview_image
-            assign nav_title = nav_title | truncate: 60
+            assign node_title = child_node.title.value | default: child_node.title | default: child_node.display_name | default: child_node.handle
+            assign node_slug = child_node.slug.value | default: child_node.slug
+            assign node_icon = child_node.icon.value | default: child_node.icon
+
+            assign nav_collection = child_node.collection_ref.value | default: child_node.collection_ref
+            assign nav_url = blank
             assign is_current = false
-            if nav_collection.handle == collection.handle
-              assign is_current = true
+
+            if nav_collection == blank
+              assign node_collection_handle = child_node.collection_handle.value | default: child_node.collection_handle
+              if node_collection_handle != blank
+                assign nav_collection = collections[node_collection_handle]
+              endif
             endif
+
+            if nav_collection != blank
+              assign nav_url = nav_collection.url
+              assign node_title = nav_collection.metafields.custom.display_title | default: nav_collection.title | default: node_title
+              assign node_icon = node_icon | default: nav_collection.featured_image | default: nav_collection.products.first.featured_media.preview_image
+              if nav_collection.handle == collection.handle
+                assign is_current = true
+              endif
+            else
+              assign node_collection_url = child_node.collection_url.value | default: child_node.collection_url
+              if node_collection_url != blank
+                assign nav_url = node_collection_url
+                if nav_url == collection.url
+                  assign is_current = true
+                endif
+              elsif node_slug != blank and collections[node_slug] != blank
+                assign nav_collection = collections[node_slug]
+                assign nav_url = nav_collection.url
+                assign node_title = nav_collection.metafields.custom.display_title | default: nav_collection.title | default: node_title
+                assign node_icon = node_icon | default: nav_collection.featured_image | default: nav_collection.products.first.featured_media.preview_image
+                if nav_collection.handle == collection.handle
+                  assign is_current = true
+                endif
+              endif
+            endif
+
+            assign node_title = node_title | truncate: 60
           -%}
-          <li class="subcollection-item">
-            <a
-              href="{{ nav_collection.url }}"
-              class="subcollection-link{% if is_current %} is-active{% endif %}"
-              {% if is_current %}aria-current="page"{% endif %}
-            >
-              <div class="subcollection-image-wrapper">
-                {%- if nav_image != blank -%}
-                  <img
-                    srcset="{{ nav_image | image_url: width: 150 }} 150w, {{ nav_image | image_url: width: 300 }} 300w"
-                    src="{{ nav_image | image_url: width: 150 }}"
-                    alt="{{ nav_image.alt | default: nav_title | escape }}"
-                    class="subcollection-image"
-                    loading="lazy"
-                    width="150"
-                    height="{{ 150 | divided_by: nav_image.aspect_ratio | round }}"
-                  >
-                {%- else -%}
-                  <div class="subcollection-image-placeholder">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
-                {%- endif -%}
-              </div>
-              <span class="subcollection-title">{{ nav_title | escape }}</span>
-            </a>
-          </li>
-        {%- endif -%}
-      {%- endfor -%}
+          {% render 'category-circle-nav', title: node_title, url: nav_url, image: node_icon, is_current: is_current %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for menu_link in subcollection_menu.links -%}
+          {%- assign nav_collection = menu_link.object -%}
+          {%- if nav_collection != blank -%}
+            {%- liquid
+              assign nav_title = nav_collection.metafields.custom.display_title | default: nav_collection.title
+              assign nav_image = nav_collection.featured_image | default: nav_collection.products.first.featured_media.preview_image
+              assign nav_title = nav_title | truncate: 60
+              assign is_current = false
+              if nav_collection.handle == collection.handle
+                assign is_current = true
+              endif
+            -%}
+            {% render 'category-circle-nav', title: nav_title, url: nav_collection.url, image: nav_image, is_current: is_current %}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     </ul>
   </div>
 {%- endif -%}
