@@ -1,0 +1,10 @@
+query($id: ID!) {
+  collection(id: $id) {
+    id
+    title
+    productsCount {
+      count
+      precision
+    }
+  }
+}

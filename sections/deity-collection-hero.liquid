@@ -1,0 +1,298 @@
+{%- liquid
+  assign intro = section.settings.intro | default: collection.description | strip_html
+  assign count_text = collection.products_count | append: ' products'
+  assign deity_collection_url = collections['deity-jewelry'].url | default: routes.collections_url
+-%}
+
+<section class="gc-deity-collection-hero color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <nav class="gc-deity-collection-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span>/</span>
+      <a href="{{ deity_collection_url }}">Deity Jewellery</a>
+      <span>/</span>
+      <span>{{ collection.title }}</span>
+    </nav>
+
+    <div class="gc-deity-collection-hero__header">
+      <div>
+        <p class="gc-deity-collection-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        <h1>{{ collection.title }}</h1>
+        {%- if intro != blank -%}
+          <p class="gc-deity-collection-hero__intro">{{ intro | truncate: 220 }}</p>
+        {%- endif -%}
+      </div>
+      <div class="gc-deity-collection-hero__summary" aria-label="Collection summary">
+        <strong>{{ count_text }}</strong>
+        <span>Shop by deity, ornament type, and idol size.</span>
+      </div>
+    </div>
+
+    <div class="gc-deity-collection-hero__trust" aria-label="Golden Collections trust points">
+      <span>Measured-size guidance</span>
+      <span>Quality checked</span>
+      <span>WhatsApp fit help</span>
+      <span>India and international shipping</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gc-deity-collection-hero {
+    background: #fff8ea;
+    border-bottom: 1px solid rgba(162, 117, 34, 0.18);
+    padding: 2rem 0 1.6rem;
+  }
+
+  .gc-deity-collection-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    color: #6f6254;
+    font-size: 1.25rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .gc-deity-collection-hero__breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gc-deity-collection-hero__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .gc-deity-collection-hero__eyebrow {
+    color: #946619;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin: 0 0 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .gc-deity-collection-hero h1 {
+    color: #1f170d;
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: clamp(3rem, 5vw, 5.2rem);
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  .gc-deity-collection-hero__intro {
+    color: #4e4438;
+    font-size: 1.55rem;
+    line-height: 1.45;
+    max-width: 760px;
+    margin: 1rem 0 0;
+  }
+
+  .gc-deity-collection-hero__summary {
+    border: 1px solid rgba(168, 121, 33, 0.25);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 12px 32px rgba(57, 38, 10, 0.06);
+    padding: 1.2rem;
+  }
+
+  .gc-deity-collection-hero__summary strong,
+  .gc-deity-collection-hero__summary span {
+    display: block;
+  }
+
+  .gc-deity-collection-hero__summary strong {
+    color: #1f170d;
+    font-size: 1.7rem;
+  }
+
+  .gc-deity-collection-hero__summary span {
+    color: #615647;
+    font-size: 1.3rem;
+    line-height: 1.35;
+    margin-top: 0.35rem;
+  }
+
+  .gc-deity-collection-hero__nav-wrap {
+    margin-top: 1.4rem;
+  }
+
+  .gc-deity-collection-hero__nav-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .gc-deity-collection-hero__nav-head h2 {
+    color: #1f170d;
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: 2.2rem;
+    margin: 0;
+  }
+
+  .gc-deity-collection-hero__nav-head a {
+    color: #8b5e12;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .gc-deity-collection-hero__circles {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gc-deity-collection-hero__circle {
+    display: grid;
+    gap: 0.7rem;
+    color: #22180d;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .gc-deity-collection-hero__circle-img {
+    aspect-ratio: 1;
+    border: 1px solid rgba(172, 124, 31, 0.24);
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(65, 44, 15, 0.08);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .gc-deity-collection-hero__circle-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .gc-deity-collection-hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 1.6rem 0 0;
+  }
+
+  .gc-deity-collection-hero__trust span {
+    border: 1px solid rgba(151, 99, 16, 0.18);
+    border-radius: 999px;
+    background: #ffffff;
+    color: #5e3d13;
+    font-size: 1.25rem;
+    padding: 0.55rem 0.9rem;
+  }
+
+  .gc-deity-collection-hero__trust span:nth-child(2) {
+    background: #fff3dc;
+    border-color: rgba(137, 31, 25, 0.22);
+    color: #7f1f19;
+  }
+
+  .gc-deity-collection-hero__trust span:nth-child(3) {
+    background: #f0f7ef;
+    border-color: rgba(32, 113, 72, 0.22);
+    color: #1f6f49;
+  }
+
+  @media screen and (max-width: 989px) {
+    .gc-deity-collection-hero__header {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .gc-deity-collection-hero__summary {
+      max-width: none;
+    }
+
+    .gc-deity-collection-hero__circles {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      padding-bottom: 0.8rem;
+      scroll-snap-type: x proximity;
+    }
+
+    .gc-deity-collection-hero__circles li {
+      flex: 0 0 94px;
+      scroll-snap-align: start;
+    }
+
+  }
+
+  @media screen and (max-width: 749px) {
+    .gc-deity-collection-hero {
+      padding-top: 1.2rem;
+    }
+
+    .gc-deity-collection-hero h1 {
+      font-size: 3.4rem;
+    }
+
+    .gc-deity-collection-hero__intro {
+      font-size: 1.42rem;
+    }
+
+    .gc-deity-collection-hero__summary {
+      border-left: 4px solid #8f1f18;
+    }
+
+    .gc-deity-collection-hero__trust {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin: 1.2rem 0 0;
+    }
+
+    .gc-deity-collection-hero__trust span {
+      border-radius: 8px;
+      line-height: 1.2;
+      min-height: 42px;
+      padding: 0.7rem 0.8rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Deity collection hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop by deity and idol size"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro override",
+      "default": "Crowns, harams, earrings, vaddanam and alankaram accessories selected by deity, ornament type and idol size."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Deity collection hero"
+    }
+  ]
+}
+{% endschema %}

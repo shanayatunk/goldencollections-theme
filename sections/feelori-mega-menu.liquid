@@ -1,0 +1,506 @@
+{% comment %}
+  Section: Feelori / Golden Collections Mega Menu
+  Version: v13 - Added Transparency Toggle
+  
+  Features:
+  - Transparent/Solid header option (toggle in theme editor)
+  - Clickable L2 titles in desktop dropdowns
+  - Multi-level accordion mobile menu (L1 -> L2 -> L3)
+  - Styles in assets/custom-styles.css
+  - JavaScript in assets/feelori-mega-menu.js
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Golden Collections Menu",
+  "tag": "section",
+  "class": "feelori-mega-menu-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Menu",
+      "default": "main-menu",
+      "info": "Select the menu you want to use (supports up to 3 levels)"
+    },
+    {
+      "type": "header",
+      "content": "Header Style"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header",
+      "label": "Enable Transparent Header",
+      "default": false,
+      "info": "Header will be transparent over hero/video sections. Disable for solid header."
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_homepage_only",
+      "label": "Transparent on Homepage Only",
+      "default": true,
+      "info": "If enabled, transparency only applies on homepage. Other pages get solid header."
+    },
+    {
+      "type": "color",
+      "id": "transparent_text_color",
+      "label": "Text Color (Transparent Mode)",
+      "default": "#FFFFFF",
+      "info": "Text/icon color when header is transparent"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "desktop_menu_height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Menu Height",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_menu_height",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Menu Height",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Color Settings (Solid Mode)"
+    },
+    {
+      "type": "color",
+      "id": "menu_bg_color",
+      "label": "Menu Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "menu_text_color",
+      "label": "Menu Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "menu_hover_color",
+      "label": "Menu Hover/Active Color",
+      "default": "#D3BC69"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_bg_color",
+      "label": "Dropdown Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_text_color",
+      "label": "Dropdown Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_hover_color",
+      "label": "Dropdown Text Hover Color",
+      "default": "#D3BC69"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Golden Collections Menu",
+      "category": "Navigation"
+    }
+  ]
+}
+{% endschema %}
+
+{% comment %} Determine if transparent mode should be active {% endcomment %}
+{%- liquid
+  assign is_transparent = false
+  
+  if section.settings.enable_transparent_header
+    if section.settings.transparent_on_homepage_only
+      if template.name == 'index'
+        assign is_transparent = true
+      endif
+    else
+      assign is_transparent = true
+    endif
+  endif
+-%}
+
+{% comment %} Inject CSS variables based on section settings {% endcomment %}
+<style>
+  :root {
+    --menu-bg-color: {{ section.settings.menu_bg_color }};
+    --menu-text-color: {{ section.settings.menu_text_color }};
+    --menu-hover-color: {{ section.settings.menu_hover_color }};
+    --dropdown-bg-color: {{ section.settings.dropdown_bg_color }};
+    --dropdown-text-color: {{ section.settings.dropdown_text_color }};
+    --dropdown-hover-color: {{ section.settings.dropdown_hover_color }};
+    --desktop-menu-height: {{ section.settings.desktop_menu_height }}px;
+    --mobile-menu-height: {{ section.settings.mobile_menu_height }}px;
+    --transparent-text-color: {{ section.settings.transparent_text_color }};
+  }
+
+  /* Transparent Header Styles */
+  {% if is_transparent %}
+  .feelori-mega-menu--transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent !important;
+    border-bottom: none;
+    z-index: 1001;
+  }
+
+  .feelori-mega-menu--transparent .feelori-mega-menu__link,
+  .feelori-mega-menu--transparent .feelori-mega-menu__utility-btn,
+  .feelori-mega-menu--transparent .feelori-mega-menu__utility-item > a,
+  .feelori-mega-menu--transparent .feelori-mega-menu__mobile-toggle span {
+    color: var(--transparent-text-color);
+  }
+
+  .feelori-mega-menu--transparent .feelori-mega-menu__utility-icon {
+    stroke: var(--transparent-text-color);
+  }
+
+  .feelori-mega-menu--transparent .feelori-mega-menu__mobile-toggle span {
+    background-color: var(--transparent-text-color);
+  }
+
+  .feelori-mega-menu--transparent .feelori-mega-menu__link::after {
+    background-color: var(--transparent-text-color);
+  }
+
+  .feelori-mega-menu--transparent .feelori-mega-menu__cart-count {
+    background-color: var(--menu-hover-color);
+    color: #fff;
+  }
+
+  /* When scrolled (fixed), revert to solid */
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed {
+    position: fixed;
+    background-color: var(--menu-bg-color) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__link,
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__utility-btn,
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__utility-item > a {
+    color: var(--menu-text-color);
+  }
+
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__utility-icon {
+    stroke: var(--menu-text-color);
+  }
+
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__mobile-toggle span {
+    background-color: var(--menu-text-color);
+  }
+
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__link::after {
+    background-color: var(--menu-hover-color);
+  }
+
+  /* Add padding to first section to prevent content hiding behind transparent header */
+  .feelori-mega-menu--transparent + .shopify-section:first-of-type,
+  .feelori-mega-menu--transparent ~ main .shopify-section:first-of-type {
+    /* Content will naturally flow under transparent header */
+  }
+  {% endif %}
+
+  /* Solid Header (Default) - ensure visible */
+  {% unless is_transparent %}
+  .feelori-mega-menu {
+    position: relative;
+    background-color: var(--menu-bg-color);
+  }
+  
+  .feelori-mega-menu.feelori-mega-menu--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  {% endunless %}
+
+  .feelori-mega-menu__item-trigger,
+  .feelori-mega-menu__mobile-item-header {
+    display: flex;
+    align-items: center;
+  }
+
+  .feelori-mega-menu__mobile-item-header {
+    justify-content: space-between;
+  }
+
+  .feelori-mega-menu__submenu-toggle,
+  .feelori-mega-menu__mobile-submenu-toggle {
+    appearance: none;
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+  }
+
+  .feelori-mega-menu__submenu-toggle svg,
+  .feelori-mega-menu__mobile-submenu-toggle svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    stroke: currentColor;
+    transition: transform 0.2s ease;
+  }
+
+  .feelori-mega-menu__submenu-toggle[aria-expanded="true"] svg,
+  .feelori-mega-menu__mobile-submenu-toggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .feelori-mega-menu--transparent .feelori-mega-menu__submenu-toggle,
+  .feelori-mega-menu--transparent .feelori-mega-menu__mobile-submenu-toggle {
+    color: var(--transparent-text-color);
+  }
+
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__submenu-toggle,
+  .feelori-mega-menu--transparent.feelori-mega-menu--fixed .feelori-mega-menu__mobile-submenu-toggle {
+    color: var(--menu-text-color);
+  }
+</style>
+
+{% comment %} Section HTML Structure {% endcomment %}
+<div class="feelori-mega-menu{% if is_transparent %} feelori-mega-menu--transparent{% endif %}" id="feelori-mega-menu" data-section-id="{{ section.id }}" data-transparent="{{ is_transparent }}">
+  <div class="feelori-mega-menu__container">
+
+    {% comment %} Mobile Menu Toggle {% endcomment %}
+    <button class="feelori-mega-menu__mobile-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="feelori-mobile-menu-container">
+      <span></span><span></span><span></span>
+    </button>
+
+    {% comment %} Logo {% endcomment %}
+    <div class="feelori-mega-menu__logo">
+      <a href="{{ routes.root_url }}">
+        {%- if settings.logo != blank -%}
+          {%- assign logo_width = settings.logo_width | default: 100 -%}
+          <img srcset="{{ settings.logo | image_url: width: logo_width }} 1x"
+            src="{{ settings.logo | image_url: width: logo_width }}"
+            alt="{{ settings.logo.alt | default: shop.name | escape }}"
+            loading="lazy"
+            width="{{ logo_width }}"
+            height="{{ settings.logo.height | default: 30 }}"
+            style="max-width: {{ logo_width }}px;">
+        {%- else -%}
+          <span>{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    {% comment %} Desktop Menu List {% endcomment %}
+    <nav class="feelori-mega-menu__nav" aria-label="Primary navigation">
+      <ul class="feelori-mega-menu__list">
+        {%- liquid
+          assign menu_handle = section.settings.menu | default: 'main-menu'
+          assign menu_linklist = linklists[menu_handle]
+        -%}
+        {% for link in menu_linklist.links %}
+          {% assign has_dropdown = false %}
+          {% if link.links.size > 0 %}
+            {% assign has_dropdown = true %}
+          {% endif %}
+
+          <li class="feelori-mega-menu__item">
+            {% if has_dropdown %}
+              <div class="feelori-mega-menu__item-trigger">
+                <a href="{{ link.url }}" class="feelori-mega-menu__link">
+                  {{ link.title | escape }}
+                </a>
+                <button
+                  type="button"
+                  class="feelori-mega-menu__submenu-toggle"
+                  aria-label="Toggle submenu for {{ link.title | escape }}"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="desktop-dropdown-{{ forloop.index }}"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}" class="feelori-mega-menu__link">
+                {{ link.title | escape }}
+              </a>
+            {% endif %}
+
+            {% if has_dropdown %}
+              <div class="feelori-mega-menu__dropdown" id="desktop-dropdown-{{ forloop.index }}">
+                <div class="feelori-mega-menu__dropdown-inner">
+                  {% for childlink in link.links %}
+                    <div class="feelori-mega-menu__column">
+                      {% if childlink.links.size > 0 %}
+                        <a href="{{ childlink.url }}" class="feelori-mega-menu__column-title">{{ childlink.title | escape }}</a>
+                        <ul class="feelori-mega-menu__submenu">
+                          {% for grandchildlink in childlink.links %}
+                            <li class="feelori-mega-menu__submenu-item">
+                              <a href="{{ grandchildlink.url }}" class="feelori-mega-menu__submenu-link">{{ grandchildlink.title | escape }}</a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% else %}
+                        <a href="{{ childlink.url }}" class="feelori-mega-menu__column-link">{{ childlink.title | escape }}</a>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    {% comment %} Utilities (Search, Account, Cart) {% endcomment %}
+    <div class="feelori-mega-menu__utilities">
+      <div class="feelori-mega-menu__utility-item feelori-mega-menu__search">
+        <a href="{{ routes.search_url }}" class="feelori-mega-menu__utility-btn" aria-label="{{ 'general.search.search' | t: default: 'Search' }}">
+          <svg class="feelori-mega-menu__utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </a>
+      </div>
+      <div class="feelori-mega-menu__utility-item feelori-mega-menu__account">
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <a href="{{ routes.account_url }}" class="feelori-mega-menu__utility-btn" aria-label="{{ 'customer.account.title' | t: default: 'Account' }}">
+              <svg class="feelori-mega-menu__utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </a>
+          {% else %}
+            <a href="{{ routes.account_login_url }}" class="feelori-mega-menu__utility-btn" aria-label="{{ 'customer.login.title' | t: default: 'Login' }}">
+              <svg class="feelori-mega-menu__utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+      <div class="feelori-mega-menu__utility-item feelori-mega-menu__cart">
+        <a href="{{ routes.cart_url }}" class="feelori-mega-menu__utility-btn" aria-label="{{ 'templates.cart.cart' | t: default: 'Cart' }}">
+          <svg class="feelori-mega-menu__utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="feelori-mega-menu__cart-count" style="display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %};">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Mobile Menu Container {% endcomment %}
+  <div class="feelori-mega-menu__mobile-container" id="feelori-mobile-menu-container" role="dialog" aria-modal="true" aria-label="Mobile menu">
+    <button class="feelori-mega-menu__mobile-close" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="feelori-mega-menu__mobile-nav" aria-label="Mobile navigation">
+      <ul class="feelori-mega-menu__mobile-list" role="list">
+        {% for link in menu_linklist.links %}
+          {% assign has_children = false %}
+          {% if link.links.size > 0 %}
+            {% assign has_children = true %}
+          {% endif %}
+
+          <li class="feelori-mega-menu__mobile-item feelori-mega-menu__mobile-item--l1" role="listitem">
+            {% if has_children %}
+              <div class="feelori-mega-menu__mobile-item-header">
+                <a href="{{ link.url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l1">
+                  {{ link.title | escape }}
+                </a>
+                <button
+                  type="button"
+                  class="feelori-mega-menu__mobile-submenu-toggle"
+                  aria-label="Toggle submenu for {{ link.title | escape }}"
+                  aria-expanded="false"
+                  aria-controls="mobile-l2-dropdown-{{ forloop.index }}"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l1">
+                {{ link.title | escape }}
+              </a>
+            {% endif %}
+
+            {% if has_children %}
+              <div class="feelori-mega-menu__mobile-dropdown feelori-mega-menu__mobile-dropdown--l2" id="mobile-l2-dropdown-{{ forloop.index }}">
+                <ul class="feelori-mega-menu__mobile-list feelori-mega-menu__mobile-list--l2" role="list">
+                  {% for childlink in link.links %}
+                    {% assign has_grandchildren = false %}
+                    {% if childlink.links.size > 0 %}
+                      {% assign has_grandchildren = true %}
+                    {% endif %}
+
+                    <li class="feelori-mega-menu__mobile-item feelori-mega-menu__mobile-item--l2{% if has_grandchildren %} feelori-mega-menu__mobile-item--has-children{% endif %}" role="listitem">
+                      <a href="{{ childlink.url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l2"
+                        {% if has_grandchildren %}
+                          aria-expanded="false"
+                          aria-controls="mobile-l3-dropdown-{{ forloop.parentloop.index }}-{{ forloop.index }}"
+                        {% endif %}>
+                        {{ childlink.title | escape }}
+                      </a>
+
+                      {% if has_grandchildren %}
+                        <div class="feelori-mega-menu__mobile-dropdown feelori-mega-menu__mobile-dropdown--l3" id="mobile-l3-dropdown-{{ forloop.parentloop.index }}-{{ forloop.index }}">
+                          <ul class="feelori-mega-menu__mobile-list feelori-mega-menu__mobile-list--l3" role="list">
+                            {% for grandchildlink in childlink.links %}
+                              <li class="feelori-mega-menu__mobile-item feelori-mega-menu__mobile-item--l3" role="listitem">
+                                <a href="{{ grandchildlink.url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l3">{{ grandchildlink.title | escape }}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </li>
+        {% endfor %}
+
+        {% if shop.customer_accounts_enabled %}
+          <li class="feelori-mega-menu__mobile-item feelori-mega-menu__mobile-item--l1" role="listitem">
+            {% if customer %}
+              <a href="{{ routes.account_url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l1">{{ 'customer.account.title' | t: default: 'Account' }}</a>
+            {% else %}
+              <a href="{{ routes.account_login_url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l1">{{ 'customer.login.title' | t: default: 'Login' }}</a>
+            {% endif %}
+          </li>
+        {% endif %}
+        <li class="feelori-mega-menu__mobile-item feelori-mega-menu__mobile-item--l1" role="listitem">
+          <a href="{{ routes.search_url }}" class="feelori-mega-menu__mobile-link feelori-mega-menu__mobile-link--l1">{{ 'general.search.search' | t: default: 'Search' }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="feelori-mega-menu__overlay"></div>
+</div>

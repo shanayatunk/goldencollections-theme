@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 24,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 20,
+        "padding_bottom": 28
+      }
+    },
+    "deity_guide_v2": {
+      "type": "deity-collection-guide",
+      "settings": {
+        "eyebrow": "Idol size guide",
+        "heading": "Choose deity jewellery by size, placement and deity",
+        "body": "For deity jewellery, the correct fit depends on idol height, ornament width, ornament height, posture and placement. Use measured product images and the fit notes before ordering.",
+        "faq_heading": "Deity jewellery size FAQ"
+      }
+    },
+    "deity_hero_current": {
+      "type": "deity-collection-hero",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "Shop by deity and idol size",
+        "intro": "Crowns, harams, earrings, vaddanam and alankaram accessories selected by deity, ornament type and idol size."
+      }
+    }
+  },
+  "order": [
+    "deity_hero_current",
+    "product-grid",
+    "deity_guide_v2"
+  ]
+}

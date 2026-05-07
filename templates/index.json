@@ -1,0 +1,823 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_category_RPryAw": {
+      "type": "custom-category",
+      "blocks": {
+        "collection_qVHdV8": {
+          "type": "collection",
+          "settings": {
+            "collection": "deity-jewelry"
+          }
+        },
+        "collection_AEYpBc": {
+          "type": "collection",
+          "settings": {
+            "collection": "bharatanatyam-jewellery"
+          }
+        },
+        "collection_GKYUJX": {
+          "type": "collection",
+          "settings": {
+            "collection": "kemp-jewellery"
+          }
+        },
+        "collection_kKibGV": {
+          "type": "collection",
+          "settings": {
+            "collection": "kemp-black-jewellery"
+          }
+        },
+        "collection_aqBqLD": {
+          "type": "collection",
+          "settings": {
+            "collection": "varalakshmi-deity-jewellery"
+          }
+        }
+      },
+      "block_order": [
+        "collection_qVHdV8",
+        "collection_AEYpBc",
+        "collection_GKYUJX",
+        "collection_kKibGV",
+        "collection_aqBqLD"
+      ],
+      "name": "Custom Category Section",
+      "settings": {
+        "title": "Shop by Category",
+        "custom_padding": 0
+      }
+    },
+    "video_banner_XmdhCF": {
+      "type": "video-banner",
+      "name": "Video Banner - Cover Hdr",
+      "settings": {
+        "video_url_1": "https://cdn.shopify.com/videos/c/o/v/75c3937a39a548cb9e228d2cb0a51a52.mov",
+        "video_url_2": "",
+        "video_url_3": "",
+        "heading": "",
+        "heading_font_size": 50,
+        "heading_font_size_mobile": 28,
+        "subheading": "",
+        "subheading_font_size": 20,
+        "subheading_font_size_mobile": 16,
+        "button_label": "Shop Now",
+        "button_link": "",
+        "section_height": 400,
+        "section_height_mobile": 300,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0.3,
+        "text_color": "#ffffff",
+        "button_background_color": "#d3bc69",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "slideshow_VRPWyW": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_6gmHiA": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 20,
+            "heading": "<strong>Deity Earrings</strong>",
+            "heading_size": "h1",
+            "subheading": "Explore gold-plated deity earrings for god and goddess idol alankaram, pooja decoration, and festival dressing.",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/deity-earrings-for-god-idols-statues",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "bottom-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-5"
+          }
+        },
+        "slide_KFEtHx": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 20,
+            "heading": "<strong>Bharatanatyam Bangles</strong>",
+            "heading_size": "h2",
+            "subheading": "Shop traditional Bharatanatyam and Kuchipudi bangles for dance practice, arangetram, and stage performance.",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/bharatanatyam-bangles",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "bottom-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-5"
+          }
+        },
+        "slide_yYwBxf": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 20,
+            "heading": "<strong>Bharatanatyam Hair Accessories</strong>",
+            "heading_size": "h2",
+            "subheading": "Complete the classical dance look with jada, rakodi, flowers, buns, sun and moon ornaments, and hair accessories.",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/bharatanatyam-hair-accessories",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "bottom-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-5"
+          }
+        }
+      },
+      "block_order": [
+        "slide_6gmHiA",
+        "slide_KFEtHx",
+        "slide_yYwBxf"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.slideshow__heading, .banner__heading {font-size: 20px !important; line-height: 1.3 !important; } .slideshow__text, .banner__text, .banner__content p {font-size: 14px !important; line-height: 1.4 !important; margin-bottom: 1.5rem; } .slideshow__actions .button, .banner__buttons .button {font-size: 14px !important; /* Adjust padding to make button smaller */ padding: 0.8rem 1.5rem !important; /* Override default minimum heights if necessary */ min-height: auto !important; min-width: auto !important; }}"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Feel Original. ",
+            "heading_size": "h2"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Shop Now",
+            "button_link_1": "shopify://collections",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 10,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-right",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "collection_list_kXxk7h": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_YNVnzg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "vara-lakshmi-dolls"
+          }
+        },
+        "featured_collection_YGT6fn": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "varalakshmi-doll-faces"
+          }
+        },
+        "featured_collection_i8pQaG": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-long-harams"
+          }
+        },
+        "featured_collection_bpnFnQ": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-short-harams"
+          }
+        },
+        "featured_collection_JTcGtY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-stone-crowns"
+          }
+        },
+        "featured_collection_dQAhGq": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-crowns"
+          }
+        },
+        "featured_collection_6NN8pC": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-earrings-for-god-idols-statues"
+          }
+        },
+        "featured_collection_zhCfDz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "god-deity-pendants"
+          }
+        },
+        "featured_collection_pa8rrU": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "waist-belt-vaddanam-jewellery-for-hindu-gods-goddess-1"
+          }
+        },
+        "featured_collection_wXEG9e": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-god-pustal-tadu-thali-kasulaperu"
+          }
+        },
+        "featured_collection_mHm3Nz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "deity-accessories-nose-rings-mustache-weapons-taira"
+          }
+        },
+        "featured_collection_XQVzAQ": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "god-goddess-arch"
+          }
+        },
+        "featured_collection_mqpXUw": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hands-legs-for-varalakshmi-idol"
+          }
+        },
+        "featured_collection_aW8VLq": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "vagamalai-thomala"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_YNVnzg",
+        "featured_collection_YGT6fn",
+        "featured_collection_i8pQaG",
+        "featured_collection_bpnFnQ",
+        "featured_collection_JTcGtY",
+        "featured_collection_dQAhGq",
+        "featured_collection_6NN8pC",
+        "featured_collection_zhCfDz",
+        "featured_collection_pa8rrU",
+        "featured_collection_wXEG9e",
+        "featured_collection_mHm3Nz",
+        "featured_collection_XQVzAQ",
+        "featured_collection_mqpXUw",
+        "featured_collection_aW8VLq"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Deity Jewellery for God & Goddess",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 5,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_DnTd7w": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_T8qR8V": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-bharatanatyam-jewellery-dance-sets"
+          }
+        },
+        "featured_collection_JF3Dwz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-short-haram"
+          }
+        },
+        "featured_collection_Bjqpwx": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-long-necklace"
+          }
+        },
+        "featured_collection_93TE6k": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-mattal-ear-chains"
+          }
+        },
+        "featured_collection_eFn9bC": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-mang-tikka"
+          }
+        },
+        "featured_collection_BUicAX": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-earrings"
+          }
+        },
+        "featured_collection_jtA3Uc": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-headset"
+          }
+        },
+        "featured_collection_wT8CPp": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-vaddanam-waistbelt"
+          }
+        },
+        "featured_collection_hYcJay": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-accessories"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_T8qR8V",
+        "featured_collection_JF3Dwz",
+        "featured_collection_Bjqpwx",
+        "featured_collection_93TE6k",
+        "featured_collection_eFn9bC",
+        "featured_collection_BUicAX",
+        "featured_collection_jtA3Uc",
+        "featured_collection_wT8CPp",
+        "featured_collection_hYcJay"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Kemp Jewellery",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 5,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_qffeRk": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_WChMaU": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-black-bharatanatyam-kuchipudi-dance-jewellery-set"
+          }
+        },
+        "featured_collection_KxkNFx": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-black-short-necklace"
+          }
+        },
+        "featured_collection_h6nHn3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-black-long-haram"
+          }
+        },
+        "featured_collection_YDcz4f": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-black-mattal"
+          }
+        },
+        "featured_collection_RBLR8r": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-black-nethi-chutti-maang-tikka"
+          }
+        },
+        "featured_collection_zNHAgQ": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "kemp-black-earrings-jhumki-jhumka"
+          }
+        },
+        "featured_collection_4Kh8Vr": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "black-kemp-vaddanam-temple-jewellery-oddiyanam"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_WChMaU",
+        "featured_collection_KxkNFx",
+        "featured_collection_h6nHn3",
+        "featured_collection_YDcz4f",
+        "featured_collection_RBLR8r",
+        "featured_collection_zNHAgQ",
+        "featured_collection_4Kh8Vr"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Kemp Black Jewellery",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 5,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_PBC7Tc": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_Xa4apj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bharatanatyam-jewellery-sets"
+          }
+        },
+        "featured_collection_gtm9df": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bharatanatyam-long-necklace"
+          }
+        },
+        "featured_collection_UMbLh9": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bharatanatyam-short-necklaces"
+          }
+        },
+        "featured_collection_BQ8wYY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "mattal-matil-bharatanatyam-dance"
+          }
+        },
+        "featured_collection_6nmUA8": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bharatanatyam-maang-tikka-matil"
+          }
+        },
+        "featured_collection_RzeACa": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bharatanatyam-earrings-collection"
+          }
+        },
+        "featured_collection_aimXAi": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bharatanatyam-headset-jewelry"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_Xa4apj",
+        "featured_collection_gtm9df",
+        "featured_collection_UMbLh9",
+        "featured_collection_BQ8wYY",
+        "featured_collection_6nmUA8",
+        "featured_collection_RzeACa",
+        "featured_collection_aimXAi"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Bharatanatyam Jewellery",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 5,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_Jwe8qB": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_nW9VDN": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/heritage-golden-collections.png",
+            "title": "Authentic Temple Craftsmanship",
+            "text": "<p>Golden Collections works with skilled partner artisans to create and curate Bharatanatyam, Kuchipudi, kemp, and deity jewellery with a strong focus on finishing, durability, and traditional detailing.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_rwRxga": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/three-generations-craftmanship.png",
+            "title": "Founded in 2012",
+            "text": "<p>Founded by Anil Tunk in Secunderabad, Golden Collections serves classical dancers, temples, devotees, and South Indian diaspora families looking for reliable traditional jewellery and alankaram accessories.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_EeDzkG": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/golden-collections-logo-1200-x-1200-without-background.png",
+            "title": "Premium Quality",
+            "text": "<p>Our checks include stone quality, gold plating, finishing, joints, and packing inspection. Real kemp Bharatanatyam jewellery typically uses 1-3 micron high-quality plating, depending on the piece.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_nW9VDN",
+        "column_rwRxga",
+        "column_EeDzkG"
+      ],
+      "settings": {
+        "title": "Why Choose Golden Collections?",
+        "heading_size": "h2",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://collections",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_EqMbxP": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_jVk3VA": {
+          "type": "column",
+          "settings": {
+            "title": "Secure Payments",
+            "text": "<p>Shop with confidence using trusted gateways like Razorpay, PhonePay, Paypal.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_xbUMDx": {
+          "type": "column",
+          "settings": {
+            "title": "Fast Delivery",
+            "text": "<p>Reliable & timely shipping across India. Free over ₹499.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_6XYBbp": {
+          "type": "column",
+          "settings": {
+            "title": "Easy Returns",
+            "text": "<p>Golden Collections ensures premium quality with a simple process for transit-damaged items. See our <a href=\"/policies/refund-policy\" target=\"_blank\" title=\"Refund Policy\">policy</a>.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_ETEnRB": {
+          "type": "column",
+          "settings": {
+            "title": "Ethical Sourcing",
+            "text": "<p>Proudly using responsibly sourced materials and craftsmanship.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_jVk3VA",
+        "column_xbUMDx",
+        "column_6XYBbp",
+        "column_ETEnRB"
+      ],
+      "settings": {
+        "title": "Shop Golden Collections With Confidence",
+        "heading_size": "h2",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://collections",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_blog_eUaGkb": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "news",
+        "post_limit": 3,
+        "heading": "From our Heritage Journal",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_rVG9pX": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_8Hwq7x": {
+          "type": "heading",
+          "settings": {
+            "heading": "<a href=\"https://g.page/r/CbA6KqXz4_UpEAE/review\" target=\"_blank\" title=\"https://g.page/r/CbA6KqXz4_UpEAE/review\">Customer Reviews </a>",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8Hwq7x"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 20
+      }
+    },
+    "slideshow_GYkNRR": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_h4yq3b": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/golden_logo.png",
+            "image_overlay_opacity": 20,
+            "heading": "Jyothi",
+            "heading_size": "h2",
+            "subheading": "I ordered this beautiful jewellery set from <strong>Australia for my daughter’s dance performance</strong> and was so <strong>happy </strong>with everything! The <strong>customer service was excellent</strong> and they even offered a video call to show the set live, which looked even better than in photos.",
+            "button_label": "",
+            "link": "https://share.google/IVXyaZxpgnCblp1US",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide_DPcCNx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/golden_logo.png",
+            "image_overlay_opacity": 0,
+            "heading": "Macharla Manoj",
+            "heading_size": "h2",
+            "subheading": "Very good store very good quality products and money worth product with high quality thank u for good service and prompt response",
+            "button_label": "",
+            "link": "https://share.google/EMpT9yAVBpCrXm2Py",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_eCRaVW": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/golden_logo.png",
+            "image_overlay_opacity": 0,
+            "heading": "Harini Ananthanarayanan",
+            "heading_size": "h2",
+            "subheading": "I made an online purchase for a goddess face. The purchase was very smooth and quick. Anil had also packed the product perfectly and so well!",
+            "button_label": "",
+            "link": "https://share.google/QYQgffzNl1Vl5bZux",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        }
+      },
+      "block_order": [
+        "slide_h4yq3b",
+        "slide_DPcCNx",
+        "slide_eCRaVW"
+      ],
+      "settings": {
+        "layout": "grid",
+        "slide_height": "small",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about customer reviews"
+      }
+    },
+    "newsletter_7X8gkK": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_7qKgnj": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get the Temple & Bharatanatyam Jewellery Checklist",
+            "heading_size": "h2"
+          }
+        },
+        "paragraph_bka8Ac": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Download the exclusive 7-page guide used by South India’s top classical dancers and temple authorities. <br/></p>"
+          }
+        },
+        "email_form_LY3UgA": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_7qKgnj",
+        "paragraph_bka8Ac",
+        "email_form_LY3UgA"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "custom_category_RPryAw",
+    "video_banner_XmdhCF",
+    "slideshow_VRPWyW",
+    "image_banner",
+    "collection_list_kXxk7h",
+    "collection_list_DnTd7w",
+    "collection_list_qffeRk",
+    "collection_list_PBC7Tc",
+    "multicolumn_Jwe8qB",
+    "multicolumn_EqMbxP",
+    "featured_blog_eUaGkb",
+    "rich_text_rVG9pX",
+    "slideshow_GYkNRR",
+    "newsletter_7X8gkK"
+  ]
+}

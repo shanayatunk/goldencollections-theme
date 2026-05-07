@@ -1,0 +1,374 @@
+{%- if collection.template_suffix == 'deity' or collection.template_suffix == 'deity-faq' -%}
+  {%- assign deity_collection_url = collections['deity-jewelry'].url | default: routes.collections_url -%}
+  {%- liquid
+    assign collection_handle = collection.handle | downcase
+    assign collection_title = collection.title | downcase
+    assign family_menu_handle = collection.metafields.custom.parent_menu_handles.value | default: ''
+    assign family_menu_handle = family_menu_handle | downcase | strip | split: ',' | first | strip
+    assign faq_family = 'amman'
+
+    if collection_handle contains 'varalakshmi' or collection_handle contains 'vara-lakshmi' or collection_handle contains 'vagamalai' or collection_handle contains 'hands-legs-for-varalakshmi' or collection_title contains 'varalakshmi' or collection_title contains 'varamahalakshmi' or family_menu_handle contains 'varalakshmi'
+      assign faq_family = 'varalakshmi'
+    elsif collection_handle contains 'banana' or collection_handle contains 'lotus' or collection_handle contains 'stand' or collection_handle contains 'asana' or collection_handle contains 'sanctum' or collection_handle contains 'singhasan' or collection_handle contains 'cushions'
+      assign faq_family = 'decor'
+    elsif collection_handle contains 'shankh' or collection_handle contains 'chakra' or collection_handle contains 'vishnu' or collection_handle contains 'perumal' or family_menu_handle contains 'vishnu'
+      assign faq_family = 'vishnu'
+    elsif collection_handle contains 'crown' or collection_handle contains 'mukut' or collection_title contains 'crown' or collection_title contains 'mukut'
+      assign faq_family = 'crown'
+    elsif collection_handle contains 'necklace' or collection_handle contains 'haram' or collection_handle contains 'pustal' or collection_handle contains 'pendant' or collection_title contains 'necklace' or collection_title contains 'haram'
+      assign faq_family = 'necklace'
+    elsif collection_handle contains 'waist' or collection_handle contains 'vaddanam' or collection_title contains 'waist' or collection_title contains 'vaddanam'
+      assign faq_family = 'waist'
+    elsif collection_handle contains 'earring' or collection_handle contains 'eyes' or collection_handle contains 'nose' or collection_handle contains 'bindi' or collection_handle contains 'tilak' or collection_handle contains 'thiruman' or collection_handle contains 'taira' or collection_handle contains 'mustache' or collection_handle contains 'weapons' or collection_handle contains 'accessories'
+      assign faq_family = 'accessory'
+    endif
+  -%}
+  {%- capture collection_description -%}
+    {{ collection.title }} at Golden Collections includes deity jewellery and Hindu idol alankaram accessories selected by deity, ornament type, placement and idol size. Use measured product images and fit notes before ordering.
+  {%- endcapture -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "{{ shop.url }}{{ collection.url }}#webpage",
+        "url": "{{ shop.url }}{{ collection.url }}",
+        "name": {{ collection.title | json }},
+        "description": {{ collection_description | strip | json }},
+        "about": [
+          { "@type": "Thing", "name": "Deity jewellery" },
+          { "@type": "Thing", "name": "Hindu idol alankaram" },
+          { "@type": "Thing", "name": "Idol size fit" }
+        ],
+        "mainEntity": { "@id": "{{ shop.url }}{{ collection.url }}#itemlist" },
+        "isPartOf": { "@id": "https://goldencollections.com/#website" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "{{ shop.url }}{{ collection.url }}#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ shop.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Deity Jewellery",
+            "item": "{{ shop.url }}{{ deity_collection_url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ collection.title | json }},
+            "item": "{{ shop.url }}{{ collection.url }}"
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "{{ shop.url }}{{ collection.url }}#itemlist",
+        "name": {{ collection.title | json }},
+        "description": {{ collection_description | strip | json }},
+        "numberOfItems": {{ collection.products_count }},
+        "itemListElement": [
+          {%- for product in collection.products limit: 30 -%}
+            {%- liquid
+              assign card_primary_deity_ref = product.metafields.custom.primary_deity.value
+              assign card_primary_deity = card_primary_deity_ref.name.value | default: card_primary_deity_ref.name | default: product.metafields.custom.primary_deity.value | default: product.metafields.custom.primary_deity
+              assign card_ornament_ref = product.metafields.custom.ornament_type.value
+              assign card_ornament = card_ornament_ref.name.value | default: card_ornament_ref.name | default: product.metafields.custom.ornament_type.value | default: product.metafields.custom.ornament_type | default: product.type
+              assign card_compatibility = product.metafields.custom.compatibility_class.value | default: product.metafields.custom.compatibility_class
+              assign card_idol_min = product.metafields.custom.idol_height_min_in.value | default: product.metafields.custom.idol_height_min_in
+              assign card_idol_max = product.metafields.custom.idol_height_max_in.value | default: product.metafields.custom.idol_height_max_in
+              assign card_ornament_width = product.metafields.custom.ornament_width_in.value | default: product.metafields.custom.ornament_width_in
+              assign card_ornament_height = product.metafields.custom.ornament_height_in.value | default: product.metafields.custom.ornament_height_in
+              assign card_ornament_depth = product.metafields.custom.ornament_depth_in.value | default: product.metafields.custom.ornament_depth_in
+            -%}
+            {%- capture card_idol_range -%}
+              {%- if card_idol_min != blank and card_idol_max != blank -%}
+                {{ card_idol_min }}-{{ card_idol_max }} inch idol
+              {%- elsif card_idol_min != blank -%}
+                {{ card_idol_min }} inch idol and above
+              {%- elsif card_idol_max != blank -%}
+                Up to {{ card_idol_max }} inch idol
+              {%- endif -%}
+            {%- endcapture -%}
+            {%- capture card_measured_size -%}
+              {%- if card_ornament_width != blank -%}Width {{ card_ornament_width }} in{%- endif -%}
+              {%- if card_ornament_width != blank and card_ornament_height != blank -%}; {% endif -%}
+              {%- if card_ornament_height != blank -%}Height {{ card_ornament_height }} in{%- endif -%}
+              {%- if card_ornament_depth != blank -%}
+                {%- if card_ornament_width != blank or card_ornament_height != blank -%}; {% endif -%}
+                Depth {{ card_ornament_depth }} in
+              {%- endif -%}
+            {%- endcapture -%}
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "url": "{{ shop.url }}{{ product.url }}",
+              "item": {
+                "@type": "Product",
+                "@id": "{{ shop.url }}{{ product.url }}#product",
+                "name": {{ product.title | json }},
+                "url": "{{ shop.url }}{{ product.url }}",
+                "image": "{{ product.featured_media | image_url: width: 900 | prepend: 'https:' }}",
+                "category": "Deity jewellery and Hindu idol alankaram accessory",
+                "additionalProperty": [
+                  { "@type": "PropertyValue", "name": "Ornament type", "value": {{ card_ornament | strip | json }} }
+                  {%- if card_primary_deity != blank -%}
+                  ,{ "@type": "PropertyValue", "name": "Primary deity", "value": {{ card_primary_deity | strip | json }} }
+                  {%- endif -%}
+                  {%- if card_compatibility != blank -%}
+                  ,{ "@type": "PropertyValue", "name": "Deity compatibility", "value": {{ card_compatibility | strip | json }} }
+                  {%- endif -%}
+                  {%- if card_idol_range != blank -%}
+                  ,{ "@type": "PropertyValue", "name": "Generally suitable for idol size", "value": {{ card_idol_range | strip | json }} }
+                  {%- endif -%}
+                  {%- if card_measured_size != blank -%}
+                  ,{ "@type": "PropertyValue", "name": "Actual ornament measurement", "value": {{ card_measured_size | strip | json }} }
+                  {%- endif -%}
+                ],
+                "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "{{ cart.currency.iso_code }}",
+                  "price": "{{ product.price | money_without_currency | replace: ',', '' }}",
+                  "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+                  "url": "{{ shop.url }}{{ product.url }}"
+                }
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "{{ shop.url }}{{ collection.url }}#deity-size-faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I choose deity jewellery size?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Start with the generally suitable idol size shown on the product, then compare the actual ornament measurement with your idol's head, neck, chest, waist or decoration area."
+            }
+          }
+          {%- case faq_family -%}
+            {%- when 'varalakshmi' -%}
+              ,{
+                "@type": "Question",
+                "name": "What should I measure for Varalakshmi alankaram?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "For Varalakshmi, check the idol or doll height, face width, crown height space, hand and leg placement, and the area where vagamalai or thomala will sit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can Amman or Lakshmi jewellery be used for Varalakshmi Vratham?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Many Amman and Lakshmi pieces can work for Varalakshmi Vratham when the deity style, placement and actual measurements match your idol or doll."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Should I buy a full setup or separate pieces?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Choose separate pieces when matching an existing idol. Choose a fuller setup when you want the face, crown, hands, legs, garlands and decoration to look coordinated."
+                }
+              }
+            {%- when 'vishnu' -%}
+              ,{
+                "@type": "Question",
+                "name": "How do I choose Vishnu or Perumal alankaram items?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Match the deity first, then check the product placement such as shankh chakra, arch, singhasan, taira, weapons or ornament position."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are shankh chakra items only for Vishnu and Perumal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Shankh chakra pieces are mainly selected for Vishnu, Perumal, Balaji and related forms. Use the measured product image to confirm the size suits your idol."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What should I check for arch, singhasan and stand items?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Check idol height, sitting or standing posture, base width and the available pooja mandir space before choosing arch, singhasan, cushion or stand items."
+                }
+              }
+            {%- when 'crown' -%}
+              ,{
+                "@type": "Question",
+                "name": "How do I choose the right deity crown or mukut size?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Measure your idol's head width and the height available above the head, then compare those measurements with the crown's width and height in the product images."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between gold, stone and hair crowns?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Gold crowns give a traditional temple look, stone crowns add a decorative festive look, and hair crowns are chosen when the idol has a hair-style or back-head placement."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will the same crown fit every idol of the same height?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Two idols with the same height can have different head width, face shape or hair style, so the actual crown measurement is the final fit check."
+                }
+              }
+            {%- when 'necklace' -%}
+              ,{
+                "@type": "Question",
+                "name": "How do I choose between short necklace and long haram?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Choose a short necklace for the neck or upper chest area, and a long haram when you want the jewellery to fall lower across the idol body or dress."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What measurements matter for deity necklaces?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Check idol height, neck or chest width, necklace drop length and the way the idol is dressed, because draping can change how the necklace sits."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can one haram work for different god or goddess idols?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, many deity harams are General/Common when the size and placement match. Deity-specific designs should be matched with the deity shown or mentioned."
+                }
+              }
+            {%- when 'waist' -%}
+              ,{
+                "@type": "Question",
+                "name": "How do I choose a deity waist belt or vaddanam?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Measure the idol's waist or dress width where the belt will sit, then compare it with the actual belt measurement and product image."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does posture affect vaddanam fit?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Sitting idols, standing idols and dolls with wide dresses can need different belt lengths even if the idol height is similar."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can deity waist belts be used for many goddesses?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Many waist belts are suitable for multiple goddess idols when the measured size, waist placement and decoration style match the idol."
+                }
+              }
+            {%- when 'accessory' -%}
+              ,{
+                "@type": "Question",
+                "name": "How do I choose small deity accessories like earrings, eyes or nose rings?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "For small accessories, match the placement first, then compare the actual product measurement with the idol face, ears, eyes or decoration area."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are these accessories deity-specific?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Some accessories are deity-specific, while others are General/Common. Use the product title, deity notes and measured images before ordering."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why are measured images important for small accessories?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Small differences are very visible on idol faces and ornaments, so the measuring tape image helps confirm proportion before purchase."
+                }
+              }
+            {%- when 'decor' -%}
+              ,{
+                "@type": "Question",
+                "name": "How do I choose deity decoration items?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Check the idol height, base width, pooja mandir space and whether the item sits behind, beside, under or around the idol."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can decorative items be used for many deities?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Many banana trees, lotus, stands, cushions and mandapam-style decor pieces are common for multiple deities when size and setup space are suitable."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What should I check before buying a stand or peedam?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Check the idol base size, weight, posture and available pooja space so the stand, peedam or asana supports the idol neatly."
+                }
+              }
+            {%- else -%}
+              ,{
+                "@type": "Question",
+                "name": "What does General/Common mean for deity jewellery?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "General/Common means the ornament can be used for many god or goddess idols when the measured size and placement are suitable."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why does idol size matter?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The same idol height can have different head width, posture, waist shape or draping, so actual ornament measurement is the final fit check."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What should I check before ordering?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Check deity, ornament type, placement, generally suitable idol size, actual ornament measurement and the measuring tape product image."
+                }
+              }
+          {%- endcase -%},
+          {
+            "@type": "Question",
+            "name": "Can I get size help before buying?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Share your idol photo and measurements on WhatsApp so Golden Collections can help check likely fit before ordering."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+{%- endif -%}

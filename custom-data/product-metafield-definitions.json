@@ -1,0 +1,21 @@
+[
+  { "definition": { "name": "Primary Deity", "namespace": "custom", "key": "primary_deity", "type": "single_line_text_field", "ownerType": "PRODUCT", "description": "Primary deity or deity group displayed as Made for." } },
+  { "definition": { "name": "Compatible Deities", "namespace": "custom", "key": "compatible_deities", "type": "list.single_line_text_field", "ownerType": "PRODUCT", "description": "Other deity groups this product can be suitable for." } },
+  { "definition": { "name": "Compatibility Class", "namespace": "custom", "key": "compatibility_class", "type": "single_line_text_field", "ownerType": "PRODUCT", "description": "Deity Specific, Multi-Deity, General/Common, or Festival Specific." } },
+  { "definition": { "name": "Ornament Type", "namespace": "custom", "key": "ornament_type", "type": "single_line_text_field", "ownerType": "PRODUCT", "description": "Crown, short haram, long haram, earrings, vaddanam, nose ring, hands and legs, etc." } },
+  { "definition": { "name": "Idol Height Min Inches", "namespace": "custom", "key": "idol_height_min_in", "type": "number_decimal", "ownerType": "PRODUCT", "description": "Minimum suggested idol height in inches." } },
+  { "definition": { "name": "Idol Height Max Inches", "namespace": "custom", "key": "idol_height_max_in", "type": "number_decimal", "ownerType": "PRODUCT", "description": "Maximum suggested idol height in inches." } },
+  { "definition": { "name": "Ornament Height Inches", "namespace": "custom", "key": "ornament_height_in", "type": "number_decimal", "ownerType": "PRODUCT", "description": "Measured ornament height in inches." } },
+  { "definition": { "name": "Ornament Width Inches", "namespace": "custom", "key": "ornament_width_in", "type": "number_decimal", "ownerType": "PRODUCT", "description": "Measured ornament width in inches." } },
+  { "definition": { "name": "Ornament Depth Inches", "namespace": "custom", "key": "ornament_depth_in", "type": "number_decimal", "ownerType": "PRODUCT", "description": "Measured ornament depth or arc in inches where relevant." } },
+  { "definition": { "name": "Placement", "namespace": "custom", "key": "placement", "type": "single_line_text_field", "ownerType": "PRODUCT", "description": "Head, forehead, ears, neck, chest, waist, hands, feet, arch, or base." } },
+  { "definition": { "name": "Regional Names", "namespace": "custom", "key": "regional_names", "type": "list.single_line_text_field", "ownerType": "PRODUCT", "description": "Regional and alternate names customers may search for." } },
+  { "definition": { "name": "Not For Deities", "namespace": "custom", "key": "not_for_deities", "type": "list.single_line_text_field", "ownerType": "PRODUCT", "description": "Deity groups this product should not be positioned for." } },
+  { "definition": { "name": "Size Confidence", "namespace": "custom", "key": "size_confidence", "type": "single_line_text_field", "ownerType": "PRODUCT", "description": "Measured, Measured from product image, Owner confirmed, Inferred, or Check product image." } },
+  { "definition": { "name": "Fit Notes", "namespace": "custom", "key": "fit_notes", "type": "multi_line_text_field", "ownerType": "PRODUCT", "description": "Plain-language fit caveats and size guidance." } },
+  { "definition": { "name": "Quality Checks", "namespace": "custom", "key": "quality_checks", "type": "multi_line_text_field", "ownerType": "PRODUCT", "description": "Quality checks performed before packing and shipping." } },
+  { "definition": { "name": "Set Items Included", "namespace": "custom", "key": "set_items_included", "type": "list.single_line_text_field", "ownerType": "PRODUCT", "description": "Items included in a set." } },
+  { "definition": { "name": "Optional Items", "namespace": "custom", "key": "optional_items", "type": "list.single_line_text_field", "ownerType": "PRODUCT", "description": "Optional add-ons or custom items." } },
+  { "definition": { "name": "Component Count", "namespace": "custom", "key": "component_count", "type": "number_integer", "ownerType": "PRODUCT", "description": "Number of included components." } },
+  { "definition": { "name": "Range Type", "namespace": "custom", "key": "range_type", "type": "single_line_text_field", "ownerType": "PRODUCT", "description": "Deity, regular dance, premium kemp, black kemp, or related range." } }
+]

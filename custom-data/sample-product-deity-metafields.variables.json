@@ -1,0 +1,81 @@
+{
+  "metafields": [
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "primary_deity",
+      "type": "single_line_text_field",
+      "value": "Varalakshmi / Lakshmi / Amman"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "compatibility_class",
+      "type": "single_line_text_field",
+      "value": "General/Common"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "ornament_type",
+      "type": "single_line_text_field",
+      "value": "Crown / Mukut / Kireedam"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "idol_height_min_in",
+      "type": "number_decimal",
+      "value": "8"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "idol_height_max_in",
+      "type": "number_decimal",
+      "value": "10"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "ornament_width_in",
+      "type": "number_decimal",
+      "value": "4.2"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "placement",
+      "type": "single_line_text_field",
+      "value": "Head / Mukut"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "size_confidence",
+      "type": "single_line_text_field",
+      "value": "Measured from product image"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "fit_notes",
+      "type": "multi_line_text_field",
+      "value": "Best for idols around 8-10 inches when the head width matches the measured crown width. Check the measuring tape image before ordering."
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "regional_names",
+      "type": "list.single_line_text_field",
+      "value": "[\"Mukut\",\"Kireedam\",\"Kireetam\",\"Crown\"]"
+    },
+    {
+      "ownerId": "gid://shopify/Product/PRODUCT_ID",
+      "namespace": "custom",
+      "key": "quality_checks",
+      "type": "multi_line_text_field",
+      "value": "Stone quality, gold plating, finishing, joints and packing are checked before shipping."
+    }
+  ]
+}

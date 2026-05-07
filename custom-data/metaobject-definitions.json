@@ -1,0 +1,55 @@
+[
+  {
+    "definition": {
+      "type": "deity_group",
+      "name": "Deity Group",
+      "description": "Reusable deity groups and aliases for deity jewellery compatibility.",
+      "access": {
+        "storefront": "PUBLIC_READ"
+      },
+      "fieldDefinitions": [
+        { "key": "name", "name": "Name", "type": "single_line_text_field", "required": true },
+        { "key": "aliases", "name": "Aliases", "type": "list.single_line_text_field" },
+        { "key": "regional_names", "name": "Regional Names", "type": "list.single_line_text_field" },
+        { "key": "parent_group", "name": "Parent Group", "type": "single_line_text_field" },
+        { "key": "specific_symbols", "name": "Specific Symbols", "type": "list.single_line_text_field" },
+        { "key": "seo_intro", "name": "SEO Intro", "type": "multi_line_text_field" },
+        { "key": "compatibility_notes", "name": "Compatibility Notes", "type": "multi_line_text_field" }
+      ]
+    }
+  },
+  {
+    "definition": {
+      "type": "deity_ornament_type",
+      "name": "Deity Ornament Type",
+      "description": "Reusable deity jewellery ornament families for navigation, filtering, and product templates.",
+      "access": {
+        "storefront": "PUBLIC_READ"
+      },
+      "fieldDefinitions": [
+        { "key": "name", "name": "Name", "type": "single_line_text_field", "required": true },
+        { "key": "aliases", "name": "Aliases", "type": "list.single_line_text_field" },
+        { "key": "placement", "name": "Placement", "type": "single_line_text_field" },
+        { "key": "fit_measurement_needed", "name": "Fit Measurement Needed", "type": "boolean" },
+        { "key": "seo_definition", "name": "SEO Definition", "type": "multi_line_text_field" }
+      ]
+    }
+  },
+  {
+    "definition": {
+      "type": "deity_size_profile",
+      "name": "Deity Size Profile",
+      "description": "Reusable idol height profiles and fit notes for deity jewellery.",
+      "access": {
+        "storefront": "PUBLIC_READ"
+      },
+      "fieldDefinitions": [
+        { "key": "label", "name": "Label", "type": "single_line_text_field", "required": true },
+        { "key": "idol_height_min_in", "name": "Idol Height Min Inches", "type": "number_decimal" },
+        { "key": "idol_height_max_in", "name": "Idol Height Max Inches", "type": "number_decimal" },
+        { "key": "fit_notes", "name": "Fit Notes", "type": "multi_line_text_field" },
+        { "key": "confidence", "name": "Confidence", "type": "single_line_text_field" }
+      ]
+    }
+  }
+]

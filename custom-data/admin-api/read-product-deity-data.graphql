@@ -1,0 +1,42 @@
+query ReadProductDeityData($id: ID!) {
+  product(id: $id) {
+    id
+    title
+    primaryDeity: metafield(namespace: "custom", key: "primary_deity") {
+      jsonValue
+    }
+    compatibilityClass: metafield(namespace: "custom", key: "compatibility_class") {
+      jsonValue
+    }
+    ornamentType: metafield(namespace: "custom", key: "ornament_type") {
+      jsonValue
+    }
+    idolHeightMin: metafield(namespace: "custom", key: "idol_height_min_in") {
+      jsonValue
+    }
+    idolHeightMax: metafield(namespace: "custom", key: "idol_height_max_in") {
+      jsonValue
+    }
+    ornamentWidth: metafield(namespace: "custom", key: "ornament_width_in") {
+      jsonValue
+    }
+    ornamentHeight: metafield(namespace: "custom", key: "ornament_height_in") {
+      jsonValue
+    }
+    placement: metafield(namespace: "custom", key: "placement") {
+      jsonValue
+    }
+    sizeConfidence: metafield(namespace: "custom", key: "size_confidence") {
+      jsonValue
+    }
+    fitNotes: metafield(namespace: "custom", key: "fit_notes") {
+      jsonValue
+    }
+    regionalNames: metafield(namespace: "custom", key: "regional_names") {
+      jsonValue
+    }
+    qualityChecks: metafield(namespace: "custom", key: "quality_checks") {
+      jsonValue
+    }
+  }
+}

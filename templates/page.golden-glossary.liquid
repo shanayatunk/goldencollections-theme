@@ -1,0 +1,240 @@
+{% comment %}
+  entries managed via Shopify admin  Content  Metaobjects  Glossary Term
+{% endcomment %}
+
+{% layout 'page' %}
+
+{%- assign glossary_entries = shop.metaobjects.glossary_term.values | sort_natural: 'term.value' -%}
+{%- assign alphabet_csv = '' -%}
+{%- for entry in glossary_entries -%}
+  {%- assign term_value = entry.term.value | default: '' | strip -%}
+  {%- if term_value != blank -%}
+    {%- assign letter = term_value | slice: 0, 1 | upcase -%}
+    {%- assign letter_token = '|' | append: letter | append: '|' -%}
+    {%- unless alphabet_csv contains letter_token -%}
+      {%- assign alphabet_csv = alphabet_csv | append: letter_token -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign alphabet_letters = alphabet_csv | split: '|' -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Golden Collections Glossary of Temple & Classical Dance Jewellery",
+  "url": "{{ shop.url }}{{ page.url }}",
+  "description": "Glossary of deity jewellery, Bharatanatyam and Kuchipudi ornaments curated by Golden Collections."
+}
+</script>
+
+<style>
+  .gc-glossary { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  .gc-glossary__hero { text-align: center; margin-bottom: 3rem; }
+  .gc-glossary__hero h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #2A2A2A;
+    margin-bottom: 1.2rem;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .gc-glossary__hero p {
+    font-size: 1.35rem;
+    color: #555;
+    line-height: 1.75;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+
+  .gc-glossary__nav { background: #f9f5f0; padding: 20px; border-radius: 8px; margin-bottom: 50px; }
+  .gc-glossary__nav p {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .gc-glossary__nav ul { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 0; margin: 0; }
+  .gc-glossary__nav ul li { list-style: none; }
+  .gc-glossary__nav a {
+    font-size: 1.15rem;
+    color: #D3BC69;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+    background: #fff;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    display: inline-block;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .gc-glossary__nav a:hover { color: #fff; background: #D3BC69; border-color: #D3BC69; }
+
+  .gc-glossary-section { margin-top: 60px; scroll-margin-top: 100px; }
+  .gc-glossary-section h2 {
+    font-size: 2.4rem;
+    color: #D3BC69;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border-bottom: 2px solid #D3BC69;
+    display: inline-block;
+    padding-bottom: 4px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+
+  dl { margin-top: 20px; }
+  dt {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-top: 35px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+
+  .term-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f9f5f0;
+    border: 1px solid #e0e0e0;
+    flex-shrink: 0;
+  }
+
+  dd {
+    margin-left: 85px;
+    font-size: 1.3rem;
+    color: #555;
+    line-height: 1.85;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 20px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  dd:last-child { border-bottom: none; }
+
+  .shop-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 700;
+    color: #D3BC69;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    font-family: 'New York', 'Times New Roman', serif;
+  }
+  .shop-link:hover { color: #b59f4f; }
+
+  .gc-glossary__footer {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #444;
+    font-size: 1.3rem;
+    background: #f9f5f0;
+    padding: 40px;
+    border-radius: 8px;
+    font-family: 'New York', 'Times New Roman', serif;
+    line-height: 1.85;
+  }
+  .gc-glossary__footer a { color: #D3BC69; font-weight: bold; }
+
+  @media(max-width: 768px) {
+    .gc-glossary__hero h1 { font-size: 2.4rem; }
+    .gc-glossary__hero p { font-size: 1.15rem; }
+    .gc-glossary { padding: 30px 15px; }
+    dt { font-size: 1.4rem; }
+    dd { margin-left: 0; margin-top: 12px; border-bottom: 1px solid #eee; font-size: 1.15rem; }
+    .gc-glossary__nav ul { gap: 8px; }
+    .gc-glossary__nav a { font-size: 1rem; padding: 8px 14px; }
+    .gc-glossary-section h2 { font-size: 2rem; }
+    .term-icon { width: 60px; height: 60px; }
+  }
+</style>
+
+<section class="gc-glossary">
+  <header class="gc-glossary__hero">
+    <h1>Golden Collections Glossary of Temple &amp; Classical Dance Jewellery</h1>
+    <p>
+      <strong>Golden Collections</strong> presents a curated glossary of
+      <em>temple jewellery</em>, <em>Bharatanatyam &amp; Kuchipudi dance ornaments</em>, and
+      <em>deity alankaram accessories</em>.
+    </p>
+  </header>
+
+  {%- if alphabet_csv != blank -%}
+    <nav class="gc-glossary__nav">
+      <p><strong>Jump to letter:</strong></p>
+      <ul>
+        {%- for letter in alphabet_letters -%}
+          {%- if letter != blank -%}
+            <li><a href="#gc-letter-{{ letter | downcase }}">{{ letter }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    {%- for letter in alphabet_letters -%}
+      {%- if letter == blank -%}{%- continue -%}{%- endif -%}
+      <section id="gc-letter-{{ letter | downcase }}" class="gc-glossary-section">
+        <h2>{{ letter }}</h2>
+        <dl>
+          {%- for entry in glossary_entries -%}
+            {%- assign term_value = entry.term.value | default: '' | strip -%}
+            {%- if term_value == blank -%}{%- continue -%}{%- endif -%}
+            {%- assign first_letter = term_value | slice: 0, 1 | upcase -%}
+            {%- if first_letter != letter -%}{%- continue -%}{%- endif -%}
+            {%- assign entry_image = entry.image.value -%}
+            <dt>
+              {%- if entry_image != blank -%}
+                {{
+                  entry_image
+                  | image_url: width: 140
+                  | image_tag:
+                    class: 'term-icon',
+                    loading: 'lazy',
+                    alt: term_value,
+                    width: 70,
+                    height: 70
+                }}
+              {%- endif -%}
+              {{ term_value | escape }}
+            </dt>
+            <dd>
+              {%- if entry.definition != blank -%}
+                {{ entry.definition | metafield_tag }}
+              {%- endif -%}
+              {%- if entry.collection_link.value != blank -%}
+                <a href="{{ entry.collection_link.value | escape }}" class="shop-link">Explore {{ term_value | escape }} &rarr;</a>
+              {%- endif -%}
+            </dd>
+          {%- endfor -%}
+        </dl>
+      </section>
+    {%- endfor -%}
+  {%- else -%}
+    <div class="gc-glossary__footer">
+      <p>No glossary entries are available yet. Please add entries under <strong>Content &gt; Metaobjects &gt; Glossary Term</strong>.</p>
+    </div>
+  {%- endif -%}
+
+  <footer class="gc-glossary__footer">
+    <p>
+      This glossary is designed to help dancers, devotees, and jewellery lovers understand the
+      heritage vocabulary behind <strong>temple jewellery</strong> and
+      <strong>classical dance ornaments</strong>. For original Bharatanatyam, Kuchipudi, and
+      deity jewellery crafted in traditional South Indian style, explore the collections at
+      <strong>Golden Collections</strong>.
+    </p>
+  </footer>
+</section>

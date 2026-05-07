@@ -1,0 +1,59 @@
+{%- comment -%}
+  Reusable circular category/subcollection nav item.
+  Inputs:
+  - title: String (required)
+  - url: String (optional)
+  - image: Image object (optional)
+  - is_current: Boolean (optional)
+{%- endcomment -%}
+
+{%- assign nav_title = title | default: 'Collection' -%}
+{%- assign nav_url = url -%}
+{%- assign nav_image = image -%}
+
+<li class="subcollection-item">
+  {%- if nav_url != blank -%}
+    <a
+      href="{{ nav_url }}"
+      class="subcollection-link{% if is_current %} is-active{% endif %}"
+      {% if is_current %}aria-current="page"{% endif %}
+    >
+      <div class="subcollection-image-wrapper">
+        {%- if nav_image != blank -%}
+          <img
+            srcset="{{ nav_image | image_url: width: 150 }} 150w, {{ nav_image | image_url: width: 300 }} 300w"
+            src="{{ nav_image | image_url: width: 150 }}"
+            alt="{{ nav_image.alt | default: nav_title | escape }}"
+            class="subcollection-image"
+            loading="lazy"
+            width="150"
+            height="{{ 150 | divided_by: nav_image.aspect_ratio | round }}"
+          >
+        {%- else -%}
+          <div class="subcollection-image-placeholder">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {%- endif -%}
+      </div>
+      <span class="subcollection-title">{{ nav_title | escape }}</span>
+    </a>
+  {%- else -%}
+    <div class="subcollection-link is-disabled" aria-disabled="true">
+      <div class="subcollection-image-wrapper">
+        {%- if nav_image != blank -%}
+          <img
+            srcset="{{ nav_image | image_url: width: 150 }} 150w, {{ nav_image | image_url: width: 300 }} 300w"
+            src="{{ nav_image | image_url: width: 150 }}"
+            alt="{{ nav_image.alt | default: nav_title | escape }}"
+            class="subcollection-image"
+            loading="lazy"
+            width="150"
+            height="{{ 150 | divided_by: nav_image.aspect_ratio | round }}"
+          >
+        {%- else -%}
+          <div class="subcollection-image-placeholder">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {%- endif -%}
+      </div>
+      <span class="subcollection-title">{{ nav_title | escape }}</span>
+    </div>
+  {%- endif -%}
+</li>
+

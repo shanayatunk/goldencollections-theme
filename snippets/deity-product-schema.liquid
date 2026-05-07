@@ -1,0 +1,193 @@
+{%- if product.template_suffix == 'deity' -%}
+  {%- liquid
+    assign primary_deity_ref = product.metafields.custom.primary_deity.value
+    assign primary_deity = primary_deity_ref.name.value | default: primary_deity_ref.name | default: product.metafields.custom.primary_deity.value | default: product.metafields.custom.primary_deity | default: 'General deity'
+    assign compatibility = product.metafields.custom.compatibility_class.value | default: product.metafields.custom.compatibility_class | default: 'General/Common'
+    assign ornament_ref = product.metafields.custom.ornament_type.value
+    assign ornament_type = ornament_ref.name.value | default: ornament_ref.name | default: product.metafields.custom.ornament_type.value | default: product.metafields.custom.ornament_type | default: product.type
+    assign placement = product.metafields.custom.placement.value | default: product.metafields.custom.placement
+    assign confidence = product.metafields.custom.size_confidence.value | default: product.metafields.custom.size_confidence
+    assign idol_min = product.metafields.custom.idol_height_min_in.value | default: product.metafields.custom.idol_height_min_in
+    assign idol_max = product.metafields.custom.idol_height_max_in.value | default: product.metafields.custom.idol_height_max_in
+    assign ornament_width = product.metafields.custom.ornament_width_in.value | default: product.metafields.custom.ornament_width_in
+    assign ornament_height = product.metafields.custom.ornament_height_in.value | default: product.metafields.custom.ornament_height_in
+    assign ornament_depth = product.metafields.custom.ornament_depth_in.value | default: product.metafields.custom.ornament_depth_in
+    assign material = product.metafields.custom.material.value | default: product.metafields.custom.material
+    assign quality_checks = product.metafields.custom.quality_checks.value | default: product.metafields.custom.quality_checks | default: 'Stone quality, gold plating, finishing, joints and packing are checked before shipping.'
+    assign regional_names_display = product.metafields.custom.regional_names_display.value | default: product.metafields.custom.regional_names_display
+  -%}
+
+  {%- capture idol_range -%}
+    {%- if idol_min != blank and idol_max != blank -%}
+      {{ idol_min }}-{{ idol_max }} inch idol
+    {%- elsif idol_min != blank -%}
+      {{ idol_min }} inch idol and above
+    {%- elsif idol_max != blank -%}
+      Up to {{ idol_max }} inch idol
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- capture measured_size -%}
+    {%- if ornament_width != blank -%}Width {{ ornament_width }} in{%- endif -%}
+    {%- if ornament_width != blank and ornament_height != blank -%}; {% endif -%}
+    {%- if ornament_height != blank -%}Height {{ ornament_height }} in{%- endif -%}
+    {%- if ornament_depth != blank -%}
+      {%- if ornament_width != blank or ornament_height != blank -%}; {% endif -%}
+      Depth {{ ornament_depth }} in
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- capture deity_schema_description -%}
+    {{ product.title }} from Golden Collections is deity jewellery for {{ primary_deity }}. It is classified as {{ compatibility }}{% if placement != blank %} with placement for {{ placement }}{% endif %}. Customers should use the measured product images and fit notes before ordering because idol posture, head width and draping can affect fit.
+  {%- endcapture -%}
+
+  {%- capture deity_made_for_answer -%}
+    This product is marked for {{ primary_deity }} and classified as {{ compatibility }}.
+  {%- endcapture -%}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "{{ shop.url }}{{ product.url }}#webpage",
+        "url": "{{ shop.url }}{{ product.url }}",
+        "name": {{ product.title | json }},
+        "description": {{ deity_schema_description | strip | json }},
+        "about": { "@id": "{{ shop.url }}{{ product.url }}#product" },
+        "mainEntity": { "@id": "{{ shop.url }}{{ product.url }}#product" },
+        "isPartOf": { "@id": "https://goldencollections.com/#website" }
+      },
+      {
+        "@type": "Product",
+        "@id": "{{ shop.url }}{{ product.url }}#product",
+        "category": "Deity jewellery and Hindu idol alankaram accessory",
+        "alternateName": {{ regional_names_display | default: product.title | json }},
+        "isAccessoryOrSparePartFor": {
+          "@type": "Product",
+          "name": {{ primary_deity | append: ' idol or doll' | json }}
+        },
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "Primary deity",
+            "value": {{ primary_deity | strip | json }}
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Deity compatibility",
+            "value": {{ compatibility | strip | json }}
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Ornament type",
+            "value": {{ ornament_type | strip | json }}
+          }
+          {%- if idol_range != blank -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Generally suitable for idol size",
+            "value": {{ idol_range | strip | json }}
+          }
+          {%- endif -%}
+          {%- if measured_size != blank -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Actual ornament measurement",
+            "value": {{ measured_size | strip | json }}
+          }
+          {%- endif -%}
+          {%- if placement != blank -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Placement",
+            "value": {{ placement | strip | json }}
+          }
+          {%- endif -%}
+          {%- if confidence != blank -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Fit confidence",
+            "value": {{ confidence | strip | json }}
+          }
+          {%- endif -%}
+          {%- if regional_names_display != blank -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Regional and alternate search names",
+            "value": {{ regional_names_display | strip | json }}
+          }
+          {%- endif -%}
+          {%- if material != blank -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Material",
+            "value": {{ material | strip | json }}
+          }
+          {%- endif -%}
+          ,{
+            "@type": "PropertyValue",
+            "name": "Quality checks",
+            "value": {{ quality_checks | strip | json }}
+          }
+        ],
+        "offers": {
+          "@type": "Offer",
+          "@id": "{{ shop.url }}{{ product.url }}#offer",
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "merchantReturnLink": "{{ shop.url }}/policies/refund-policy"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "{{ shop.url }}{{ product.url }}#deity-fit-faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I check whether this deity jewellery fits my idol?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the generally suitable idol size, actual ornament measurement, placement and fit notes. Idol posture, head width, crown shape and draping can affect fit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which deity is this product made for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ deity_made_for_answer | strip | json }}
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I check before ordering deity jewellery?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Check that the generally suitable idol size is close to your idol height, actual ornament measurement fits the area where it will sit, and placement and deity match your decoration plan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can Golden Collections help check size before ordering?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Customers can share idol photos and measurements on WhatsApp, and Golden Collections can help check likely fit before ordering."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What quality checks are done before shipping?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ quality_checks | strip | json }}
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+{%- endif -%}

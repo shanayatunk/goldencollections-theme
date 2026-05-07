@@ -1,0 +1,16 @@
+mutation CreateProductMetafieldDefinition($definition: MetafieldDefinitionInput!) {
+  metafieldDefinitionCreate(definition: $definition) {
+    createdDefinition {
+      id
+      namespace
+      key
+      name
+      ownerType
+    }
+    userErrors {
+      field
+      message
+      code
+    }
+  }
+}

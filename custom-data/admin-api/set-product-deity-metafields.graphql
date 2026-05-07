@@ -1,0 +1,16 @@
+mutation SetProductDeityMetafields($metafields: [MetafieldsSetInput!]!) {
+  metafieldsSet(metafields: $metafields) {
+    metafields {
+      id
+      namespace
+      key
+      type
+      jsonValue
+    }
+    userErrors {
+      field
+      message
+      code
+    }
+  }
+}

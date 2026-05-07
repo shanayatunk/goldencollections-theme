@@ -1,0 +1,101 @@
+{% comment %}
+  Custom Video Section for Shopify Home Page
+  - Supports autoplay (iPhone/iPad compatible)
+  - Allows manual play option
+  - Includes video title
+{% endcomment %}
+
+<div class="custom-video-section">
+  {% if section.settings.video_title != blank %}
+    <h2 class="video-title">{{ section.settings.video_title }}</h2>
+  {% endif %}
+
+  <div class="video-wrapper">
+    {% if section.settings.video_type == "mp4" %}
+      <video 
+        {% if section.settings.autoplay %} autoplay muted loop playsinline {% else %} controls {% endif %} 
+        width="100%" 
+        class="custom-video">
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% elsif section.settings.video_type == "youtube" or section.settings.video_type == "vimeo" %}
+      <iframe 
+        src="{{ section.settings.video_url | replace: 'watch?v=', 'embed/' }}?{% if section.settings.autoplay %}autoplay=1&mute=1&loop=1&playsinline=1{% endif %}" 
+        width="100%" 
+        height="auto" 
+        frameborder="0" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen>
+      </iframe>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Video Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_title",
+      "label": "Video Title",
+      "default": "Our Featured Video"
+    },
+    {
+      "type": "select",
+      "id": "video_type",
+      "label": "Video Type",
+      "options": [
+        { "value": "mp4", "label": "MP4 Upload" },
+        { "value": "youtube", "label": "YouTube" },
+        { "value": "vimeo", "label": "Vimeo" }
+      ],
+      "default": "mp4"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Video Section",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.custom-video-section {
+  text-align: center;
+  padding: 20px;
+  font-family: 'sans-serif', Arial, Helvetica, sans-serif; /* Ensures sans-serif font */
+}
+
+.video-title {
+  font-size: 22px;
+  font-weight: normal;
+  margin-bottom: 15px;
+  font-family: 'sans-serif', Arial, Helvetica, sans-serif; /* Ensures sans-serif font */
+}
+
+.video-wrapper {
+  position: relative;
+  max-width: 100%;
+}
+
+.custom-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+</style>

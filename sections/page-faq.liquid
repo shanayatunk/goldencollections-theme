@@ -1,0 +1,140 @@
+{%- comment -%}
+  Golden Collections - Dedicated FAQ Page
+{%- endcomment -%}
+
+{% if template == 'page' and page.handle == 'faq' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Golden Collections?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Golden Collections is a specialist store for temple jewellery, Bharatanatyam and Kuchipudi dance ornaments, real kemp jewellery, and deity alankaram sets. GoldenCollections started in 2012 and is led by founder Anil Tunk in Secunderabad." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who founded Golden Collections?",
+      "acceptedAnswer": { "@type": "Answer", "text": "GoldenCollections was founded by Anil Tunk and started in 2012 in Secunderabad, Telangana." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is your temple jewellery handmade?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Golden Collections works with skilled partner artisans for handcrafted, hand-finished, and artisan-made temple jewellery, Bharatanatyam jewellery, Kuchipudi jewellery, real kemp jewellery, and deity alankaram accessories." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you ship internationally?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, Golden Collections ships to India, the US, UK, Australia, Malaysia, Singapore, and European countries. India delivery is usually 2 to 4 days, and international delivery usually takes 3 to 6 days with charges calculated at checkout." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is Golden Collections located?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Golden Collections is located at Plot no: 9, Krishnapuri Colony, Lakshmi Nagar, West Marredpally, Secunderabad, Telangana 500026, India." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between temple jewellery and regular gold jewellery?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Temple jewellery is created to adorn Hindu deities and classical dancers, often with deity motifs, kemp-style stones, antique finishes, and traditional ornament forms. Regular gold jewellery is usually designed for daily wear, fashion, or investment." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I care for my temple jewellery?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Store jewellery in an airtight box with silica gel. Avoid perfume, water, and chemicals. Clean gently with a soft dry cloth after use." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customise a Bharatanatyam set?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Custom deity jewellery is accepted via phone orders. For Bharatanatyam and Kuchipudi jewellery, customers can contact Golden Collections to check available sizing and set options." }
+    },
+    {
+      "@type": "Question",
+      "name": "What materials do you use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Materials vary by range. Real kemp jewellery uses brass with 24 carat high gold plating and copper with Kemp or Kempu stones. Regular Bharatanatyam and Kuchipudi jewellery uses alloy metal. Deity jewellery uses alloy metal with gold plating, and some pieces use brass with high gold plating." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer deity jewellery for temples?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, Golden Collections offers deity jewellery and custom deity alankaram by phone order, including crowns, harams, ornaments, and accessories for god and goddess idols." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For damage or replacement claims, Golden Collections requires an uncut 360-degree unboxing video showing the sealed package, opening process, and product condition. Please refer to the refund policy page for current return and cancellation terms." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does shipping take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most India orders are delivered in 2 to 4 days after dispatch. International shipping usually takes 3 to 6 days, with shipping charges calculated at checkout. Custom deity jewellery timelines are confirmed by phone order." }
+    }
+  ]
+}
+</script>
+{% endif %}
+
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .gc-faq-page h2 {
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: 3.4rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.5px;
+  }
+  .gc-faq-page .rte {
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: 1.3rem;
+    line-height: 1.88;
+    color: #444;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient gc-faq-page">
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <h2 class="page-title {{ section.settings.heading_size }}">
+      {{ section.settings.page.title | default: 'Frequently Asked Questions' }}
+    </h2>
+    <div class="rte">
+      {{ section.settings.page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GC FAQ Page",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "page", "id": "page", "label": "FAQ Content Page" },
+    { "type": "select", "id": "heading_size", "default": "h1", "label": "Heading size", "options": [
+      { "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" },
+      { "value": "h0", "label": "Large" }, { "value": "hxl", "label": "Extra Large" },
+      { "value": "hxxl", "label": "Maximum" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 80 }
+  ],
+  "presets": [{ "name": "GC FAQ Page" }]
+}
+{% endschema %}

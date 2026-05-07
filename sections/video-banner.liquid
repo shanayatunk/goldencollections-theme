@@ -1,0 +1,547 @@
+{% comment %}
+  Shopify Section: Video Banner (Covers Header)
+
+  Adds a full-width video banner that sits underneath the theme header,
+  supports sequential playback of up to 3 videos, and allows font size control.
+  Optimized for 9:16 portrait videos to fill width while showing full height.
+
+  Updates:
+  - Improved video display for 9:16 portrait videos - fills width, shows full height
+  - Removed letterboxing issues
+  - Better responsive behavior across all devices
+  - Added settings for up to 3 video URLs and posters
+  - Sequential video playback support
+  - Font size controls for Heading & Subheading (Desktop & Mobile)
+  - Header interaction handled by custom-styles.css and feelori-mega-menu.js
+
+  Instructions:
+  1. Ensure 'Playfair Display' is selected in Theme settings > Typography if desired.
+  2. Place this section as the *very first* section on your homepage template
+  3. Go to Online Store > Themes > Actions (...) > Edit code
+  4. Under "Sections", find/open "video-banner.liquid"
+  5. Replace the existing content with this entire updated code block. Save.
+  6. Configure the section settings in the Theme Customizer
+  7. Adjust section height to control how much of the video is visible
+  8. Save changes in the Theme Customizer
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Video Banner - Cover Hdr",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width section-video-banner-cover",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video Settings (Sequential Playback)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add up to 3 videos. They will play one after another and loop. Upload videos to Content > Files first. For 9:16 portrait videos, the video will fill the width and show as much height as the section height allows."
+    },
+    {
+      "type": "text",
+      "id": "video_url_1",
+      "label": "Video URL 1",
+      "info": "Paste URL from Shopify Files (Content > Files)."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_1",
+      "label": "Poster Image 1 (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "video_url_2",
+      "label": "Video URL 2 (Optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_2",
+      "label": "Poster Image 2 (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "video_url_3",
+      "label": "Video URL 3 (Optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_3",
+      "label": "Poster Image 3 (Optional)"
+    },
+    {
+      "type": "header",
+      "content": "Content & Styling"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Showcase Your Brand"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 50
+    },
+     {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 18,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 28
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Engage visitors with a stunning video"
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "min": 12,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size (Desktop)",
+      "default": 20
+    },
+     {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+     {
+      "type": "range",
+      "id": "section_height",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Height (Desktop)",
+      "default": 700,
+      "info": "Height of the banner. For 9:16 videos, increase this to show more of the video vertically."
+    },
+    {
+      "type": "range",
+      "id": "section_height_mobile",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Height (Mobile)",
+      "default": 600,
+       "info": "Height of the banner on mobile devices."
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 0.9,
+      "step": 0.1,
+      "label": "Overlay Opacity",
+      "default": 0.3
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#ff4d6d"
+    },
+     {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Banner - Cover Hdr"
+    }
+  ]
+}
+{% endschema %}
+
+{% comment %} Section Styles - Scoped using section ID {% endcomment %}
+<style>
+  /* Styles for the video banner section */
+  .video-banner-section-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: {{ section.settings.section_height_mobile }}px;
+    background-color: #000;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Apply desktop height using media query */
+  @media (min-width: 750px) {
+    .video-banner-section-{{ section.id }} {
+      height: {{ section.settings.section_height }}px;
+    }
+  }
+
+  /* Video styling - fills width, centers vertically */
+  .video-banner-section-{{ section.id }}__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+  }
+
+  /* Alternative approach for portrait videos - comment out above and uncomment below if needed */
+  /*
+  .video-banner-section-{{ section.id }}__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+  }
+  */
+
+  .video-banner-section-{{ section.id }}__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity }};
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .video-banner-section-{{ section.id }}__content {
+    position: relative;
+    z-index: 2;
+    color: {{ section.settings.text_color }};
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .video-banner-section-{{ section.id }}__heading {
+    font-family: 'Playfair Display', serif;
+    font-size: {{ section.settings.heading_font_size_mobile }}px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: inherit;
+    line-height: 1.2;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    max-width: 90%;
+  }
+
+  .video-banner-section-{{ section.id }}__subheading {
+    font-family: 'Playfair Display', serif;
+    font-size: {{ section.settings.subheading_font_size_mobile }}px;
+    margin-bottom: 1.5rem;
+    color: inherit;
+    max-width: 600px;
+    line-height: 1.5;
+    font-weight: normal;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+  }
+
+  .video-banner-section-{{ section.id }}__button {
+    padding: 0.8rem 1.8rem;
+    font-size: calc(var(--font-body-scale) * 1rem);
+    color: {{ section.settings.button_text_color }};
+    background-color: {{ section.settings.button_background_color }};
+    border: 1px solid transparent;
+    text-decoration: none;
+    border-radius: var(--buttons-radius, 3px);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+   .video-banner-section-{{ section.id }}__button:hover {
+      background-color: {{ section.settings.button_background_color | color_darken: 10 }};
+      color: {{ section.settings.button_text_color }};
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+   }
+
+  /* Responsive adjustments */
+  @media (min-width: 750px) {
+    .video-banner-section-{{ section.id }}__heading {
+       font-size: {{ section.settings.heading_font_size }}px;
+    }
+    .video-banner-section-{{ section.id }}__subheading {
+       font-size: {{ section.settings.subheading_font_size }}px;
+    }
+  }
+
+  @media (max-width: 749px) {
+     .video-banner-section-{{ section.id }}__button {
+        padding: 0.7rem 1.5rem;
+        font-size: calc(var(--font-body-scale) * 0.95rem);
+     }
+     
+     .video-banner-section-{{ section.id }}__content {
+       padding: 1.5rem 1rem;
+     }
+     
+     .video-banner-section-{{ section.id }}__heading {
+       max-width: 95%;
+     }
+  }
+
+  /* Ensure the video banner itself starts at the very top */
+  .section-video-banner-cover {
+    margin-top: 0 !important;
+    z-index: 1;
+  }
+
+</style>
+
+{% comment %} Section HTML Structure {% endcomment %}
+<div class="video-banner-section-{{ section.id }}">
+  {% comment %} Prepare video data - Get first available video {% endcomment %}
+  {%- liquid
+    assign first_video_url = ''
+    assign first_poster_url = ''
+
+    if section.settings.video_url_1 != blank
+      assign first_video_url = section.settings.video_url_1
+      if section.settings.poster_image_1 != blank
+         assign first_poster_url = section.settings.poster_image_1 | image_url: width: 1800
+      endif
+    elsif section.settings.video_url_2 != blank
+       assign first_video_url = section.settings.video_url_2
+       if section.settings.poster_image_2 != blank
+         assign first_poster_url = section.settings.poster_image_2 | image_url: width: 1800
+      endif
+    elsif section.settings.video_url_3 != blank
+       assign first_video_url = section.settings.video_url_3
+       if section.settings.poster_image_3 != blank
+         assign first_poster_url = section.settings.poster_image_3 | image_url: width: 1800
+      endif
+    endif
+  -%}
+
+  {% comment %} Render video only if at least one URL is provided {% endcomment %}
+  {%- if first_video_url != blank -%}
+    <video
+      id="hero-video-{{ section.id }}"
+      class="video-banner-section-{{ section.id }}__video"
+      src="{{ first_video_url }}"
+      {% if first_poster_url != blank %}poster="{{ first_poster_url }}"{% endif %}
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      aria-label="Promotional video banner for {{ shop.name }}"
+    >
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-banner-section-{{ section.id }}__overlay"></div>
+    <div class="video-banner-section-{{ section.id }}__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="video-banner-section-{{ section.id }}__heading h1">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="video-banner-section-{{ section.id }}__subheading rte">
+          {{ section.settings.subheading | escape }}
+        </p>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="video-banner-section-{{ section.id }}__button button button--primary">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    {% comment %} Placeholder if no video URL {% endcomment %}
+    <div class="video-banner-section-{{ section.id }}__content" style="background-color: #f0f0f0; color: #333;">
+       <h2 class="video-banner-section-{{ section.id }}__heading h1" style="font-family: 'Playfair Display', serif; font-size: {{ section.settings.heading_font_size }}px;">Video Banner</h2>
+       <p class="video-banner-section-{{ section.id }}__subheading" style="font-family: 'Playfair Display', serif; font-size: {{ section.settings.subheading_font_size }}px;">Please add at least one video URL in the theme editor settings.</p>
+    </div>
+  {%- endif -%}
+</div>
+
+{% comment %} JavaScript for Video Switching and Banner Activation {% endcomment %}
+<script>
+  (function() {
+    const SECTION_ID = '{{ section.id }}';
+    const currentSection = document.querySelector('.video-banner-section-{{ section.id }}');
+    let isBannerActive = false;
+
+    // --- Video Switching Logic ---
+    const videoElement = document.getElementById('hero-video-{{ section.id }}');
+    const videoSources = [
+      {% if section.settings.video_url_1 != blank %}{ src: '{{ section.settings.video_url_1 }}', poster: '{{ section.settings.poster_image_1 | image_url: width: 1800 }}' }{% endif %},
+      {% if section.settings.video_url_2 != blank %}{% unless forloop.first %},{% endunless %}{ src: '{{ section.settings.video_url_2 }}', poster: '{{ section.settings.poster_image_2 | image_url: width: 1800 }}' }{% endif %},
+      {% if section.settings.video_url_3 != blank %}{% unless forloop.first %},{% endunless %}{ src: '{{ section.settings.video_url_3 }}', poster: '{{ section.settings.poster_image_3 | image_url: width: 1800 }}' }{% endif %}
+    ].filter(video => video && video.src);
+
+    let currentVideoIndex = 0;
+    let videoEndedListener = null;
+
+    function log(message) { console.log(`[Video Banner ${SECTION_ID}] ${message}`); }
+    function warn(message) { console.warn(`[Video Banner ${SECTION_ID}] ${message}`); }
+    function error(message, err) { console.error(`[Video Banner ${SECTION_ID}] ${message}`, err); }
+
+    if (!currentSection) {
+      return;
+    }
+
+    function playNextVideo() {
+      if (!videoElement || videoSources.length <= 1) {
+        if (videoElement && videoSources.length === 1) {
+            videoElement.loop = true;
+        }
+        return;
+      }
+
+      currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
+      const nextVideo = videoSources[currentVideoIndex];
+
+      videoElement.src = nextVideo.src;
+      if (nextVideo.poster) {
+        videoElement.poster = nextVideo.poster;
+      } else {
+        videoElement.removeAttribute('poster');
+      }
+
+      videoElement.load();
+      const playPromise = videoElement.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          error('Error playing next video:', err);
+        });
+      }
+    }
+
+    function setupVideoSwitcher() {
+        if (videoElement && videoSources.length > 1) {
+            videoElement.loop = false;
+
+            if (videoEndedListener) {
+                videoElement.removeEventListener('ended', videoEndedListener);
+            }
+            videoEndedListener = playNextVideo;
+            videoElement.addEventListener('ended', videoEndedListener);
+
+        } else if (videoElement) {
+             videoElement.loop = true;
+        } else {
+            warn('Video element not found, cannot set up switcher.');
+        }
+    }
+
+    function activateBannerState() {
+       if (isBannerActive) { return; }
+       try {
+           document.body.classList.add('video-banner-active');
+           isBannerActive = true;
+           setupVideoSwitcher();
+       } catch (err) {
+           error("Error activating banner state:", err);
+           deactivateBannerState();
+       }
+    }
+
+    function deactivateBannerState() {
+      if (!isBannerActive && !document.body.classList.contains('video-banner-active')) { return; }
+      try {
+          document.body.classList.remove('video-banner-active');
+          if (videoElement && videoEndedListener) {
+              videoElement.removeEventListener('ended', videoEndedListener);
+              videoEndedListener = null;
+          }
+          isBannerActive = false;
+      } catch(err) { error('Error during deactivation:', err); }
+    }
+
+    // --- Event Listeners ---
+    if (currentSection) {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(activateBannerState, 150);
+        });
+    }
+
+    // Handle Shopify Theme Editor updates
+    if (Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(event) {
+        if (event.target.classList.contains('video-banner-section-{{ section.id }}')) {
+          deactivateBannerState();
+          setTimeout(activateBannerState, 50);
+        }
+      });
+      document.addEventListener('shopify:section:unload', function(event) {
+         if (event.target.classList.contains('video-banner-section-{{ section.id }}')) {
+           deactivateBannerState();
+         }
+      });
+    }
+
+    window.addEventListener('unload', deactivateBannerState);
+
+  })();
+</script>

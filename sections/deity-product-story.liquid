@@ -1,0 +1,342 @@
+{%- liquid
+  assign primary_deity_ref = product.metafields.custom.primary_deity.value
+  assign primary_deity = primary_deity_ref.name.value | default: primary_deity_ref.name | default: product.metafields.custom.primary_deity.value | default: product.metafields.custom.primary_deity | default: 'this deity'
+  assign compatibility = product.metafields.custom.compatibility_class.value | default: product.metafields.custom.compatibility_class | default: 'General/Common'
+  assign fit_notes = product.metafields.custom.fit_notes.value | default: product.metafields.custom.fit_notes
+  assign material = product.metafields.custom.material.value | default: product.metafields.custom.material
+  assign regional_names_metafield = product.metafields.custom.regional_names
+  assign regional_names = product.metafields.custom.regional_names.value | default: product.metafields.custom.regional_names
+  assign regional_names_text = regional_names_metafield | metafield_text
+  assign regional_names_manual_display = product.metafields.custom.regional_names_display.value | default: product.metafields.custom.regional_names_display
+  assign regional_name_0 = regional_names_metafield.value[0]
+  assign regional_name_1 = regional_names_metafield.value[1]
+  assign regional_name_2 = regional_names_metafield.value[2]
+  assign regional_name_3 = regional_names_metafield.value[3]
+  assign regional_name_4 = regional_names_metafield.value[4]
+  assign regional_name_5 = regional_names_metafield.value[5]
+  assign regional_name_6 = regional_names_metafield.value[6]
+  assign regional_name_7 = regional_names_metafield.value[7]
+  assign quality_checks = product.metafields.custom.quality_checks.value | default: product.metafields.custom.quality_checks | default: 'Stone quality, gold plating, finishing, joints and packing are checked before shipping.'
+-%}
+
+{%- capture regional_names_display -%}
+  {%- if regional_name_0 != blank -%}
+    {{ regional_name_0 }}{% if regional_name_1 != blank %}, {{ regional_name_1 }}{% endif %}{% if regional_name_2 != blank %}, {{ regional_name_2 }}{% endif %}{% if regional_name_3 != blank %}, {{ regional_name_3 }}{% endif %}{% if regional_name_4 != blank %}, {{ regional_name_4 }}{% endif %}{% if regional_name_5 != blank %}, {{ regional_name_5 }}{% endif %}{% if regional_name_6 != blank %}, {{ regional_name_6 }}{% endif %}{% if regional_name_7 != blank %}, {{ regional_name_7 }}{% endif %}
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="gc-deity-product-story">
+  <div class="page-width">
+    <div class="gc-deity-product-story__grid">
+      <div class="gc-deity-product-story__answer">
+        <p class="gc-deity-product-story__eyebrow">Size answer</p>
+        <h2>Will this fit my idol?</h2>
+        <p>
+          This product is marked for {{ primary_deity }} and classified as {{ compatibility }}. Check the measured image, placement and fit notes before ordering because idol posture, head width and draping can affect the final fit.
+        </p>
+        <a href="https://wa.me/917337294499?text={{ 'Hello Golden Collections, I need size help for ' | append: product.title | url_encode }}">Ask size help on WhatsApp</a>
+      </div>
+
+      <div class="gc-deity-product-story__accordions">
+        <details open>
+          <summary>Fit & Size</summary>
+          <div>
+            {%- if fit_notes != blank -%}
+              {{ fit_notes }}
+            {%- else -%}
+              Use the idol size range, measured ornament dimensions and product images with measuring tape to check fit.
+            {%- endif -%}
+          </div>
+        </details>
+        <details>
+          <summary>Materials</summary>
+          <div>
+            {%- if material != blank -%}
+              {{ material }}
+            {%- else -%}
+              Deity jewellery uses gold-plated alloy metal, and selected premium pieces use brass with high gold plating.
+            {%- endif -%}
+          </div>
+        </details>
+        <details>
+          <summary>Quality Checks</summary>
+          <div>{{ quality_checks }}</div>
+        </details>
+        <details>
+          <summary>Shipping & Returns</summary>
+          <div>India delivery is usually 2 to 4 days. International delivery usually takes 3 to 6 days with charges calculated at checkout. Damage or replacement claims require an uncut 360-degree unboxing video as per the return policy.</div>
+        </details>
+        <details>
+          <summary>Regional Names</summary>
+          <div>
+            {%- if regional_names_manual_display != blank or regional_names_display != blank or regional_names != blank -%}
+              <span class="gc-regional-list">
+                {%- if regional_names_manual_display != blank -%}
+                  {{ regional_names_manual_display }}
+                {%- elsif regional_names_metafield != blank -%}
+                  {{ regional_names_metafield | metafield_tag }}
+                {%- else -%}
+                  {{ regional_names_text | default: regional_names }}
+                {%- endif -%}
+              </span>
+            {%- else -%}
+              Customers may search by deity name, ornament name, regional names and placement words such as mukut, kireedam, haram, vaddanam or alankaram.
+            {%- endif -%}
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="gc-deity-product-story__complete">
+      <div>
+        <p class="gc-deity-product-story__eyebrow">Complete the alankaram</p>
+        <h2>{{ section.settings.cross_sell_heading }}</h2>
+      </div>
+      <div class="gc-deity-product-story__links">
+        {%- for block in section.blocks -%}
+          {%- assign link_collection = block.settings.collection -%}
+          {%- assign link_title = block.settings.title | default: link_collection.title -%}
+          {%- assign link_url = block.settings.link | default: link_collection.url -%}
+          {%- if link_title != blank and link_url != blank -%}
+            <a href="{{ link_url }}" {{ block.shopify_attributes }}>{{ link_title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="gc-deity-product-story__sticky" aria-label="Mobile add to cart">
+    <div>
+      <strong>{{ product.selected_or_first_available_variant.price | money }}</strong>
+      <span>{{ product.title | truncate: 34 }}</span>
+    </div>
+    <button
+      type="submit"
+      form="product-form-main"
+      class="button"
+      {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+    >
+      {%- if product.selected_or_first_available_variant.available -%}
+        Add to cart
+      {%- else -%}
+        Sold out
+      {%- endif -%}
+    </button>
+  </div>
+</section>
+
+<style>
+  .gc-deity-product-story {
+    background: #ffffff;
+    padding: 3.2rem 0 4rem;
+  }
+
+  .gc-deity-product-story__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  .gc-deity-product-story__answer,
+  .gc-deity-product-story__accordions,
+  .gc-deity-product-story__complete {
+    border: 1px solid rgba(151, 99, 16, 0.16);
+    border-radius: 8px;
+    background: #fffaf0;
+    padding: 1.6rem;
+  }
+
+  .gc-deity-product-story__eyebrow {
+    color: #986918;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.55rem;
+    text-transform: uppercase;
+  }
+
+  .gc-deity-product-story h2 {
+    color: #1f170d;
+    font-family: 'New York', 'Times New Roman', serif;
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    line-height: 1.08;
+    margin: 0 0 1rem;
+  }
+
+  .gc-deity-product-story p,
+  .gc-deity-product-story details div {
+    color: #4f463c;
+    font-size: 1.45rem;
+    line-height: 1.5;
+  }
+
+  .gc-deity-product-story__answer a,
+  .gc-deity-product-story__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-radius: 6px;
+    background: #1f7a4d;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.75rem 1.1rem;
+    text-decoration: none;
+  }
+
+  .gc-deity-product-story details {
+    border-bottom: 1px solid rgba(151, 99, 16, 0.16);
+    padding: 1.1rem 0;
+  }
+
+  .gc-deity-product-story details:last-child {
+    border-bottom: 0;
+  }
+
+  .gc-deity-product-story summary {
+    color: #21180d;
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 700;
+    list-style-position: outside;
+  }
+
+  .gc-deity-product-story details div {
+    padding-top: 0.8rem;
+  }
+
+  .gc-regional-list ul,
+  .gc-regional-list ol {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gc-regional-list li {
+    display: inline;
+  }
+
+  .gc-regional-list li:not(:last-child)::after {
+    content: ', ';
+  }
+
+  .gc-deity-product-story__complete {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: 1.4rem;
+    margin-top: 1.4rem;
+  }
+
+  .gc-deity-product-story__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-content: start;
+  }
+
+  .gc-deity-product-story__links a {
+    background: #ffffff;
+    border: 1px solid rgba(151, 99, 16, 0.22);
+    color: #5e3d13;
+  }
+
+  .gc-deity-product-story__sticky {
+    display: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .gc-deity-product-story__grid,
+    .gc-deity-product-story__complete {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gc-deity-product-story {
+      padding-bottom: 8.5rem;
+    }
+
+    .gc-deity-product-story__sticky {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      border-top: 1px solid rgba(151, 99, 16, 0.2);
+      background: #ffffff;
+      box-shadow: 0 -10px 30px rgba(42, 28, 8, 0.12);
+      padding: 0.85rem 1rem;
+    }
+
+    .gc-deity-product-story__sticky strong,
+    .gc-deity-product-story__sticky span {
+      display: block;
+    }
+
+    .gc-deity-product-story__sticky strong {
+      color: #1f170d;
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+
+    .gc-deity-product-story__sticky span {
+      color: #6b5f51;
+      font-size: 1.15rem;
+      line-height: 1.25;
+      margin-top: 0.25rem;
+    }
+
+    .gc-deity-product-story__sticky .button {
+      min-height: 48px;
+      min-width: 132px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Deity product story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cross_sell_heading",
+      "label": "Cross-sell heading",
+      "default": "Pair this piece with matching deity ornaments"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Alankaram link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optional link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Deity product story"
+    }
+  ]
+}
+{% endschema %}

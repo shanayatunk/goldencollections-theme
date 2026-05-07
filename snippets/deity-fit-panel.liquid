@@ -1,0 +1,404 @@
+{%- comment -%}
+  Deity product fit panel.
+  Reads product metafields when available and falls back to safe customer-facing defaults.
+{%- endcomment -%}
+
+{%- liquid
+  assign primary_deity_ref = product.metafields.custom.primary_deity.value
+  assign primary_deity = primary_deity_ref.name.value | default: primary_deity_ref.name | default: product.metafields.custom.primary_deity.value | default: product.metafields.custom.primary_deity | default: 'Deity alankaram'
+  assign compatibility = product.metafields.custom.compatibility_class.value | default: product.metafields.custom.compatibility_class | default: 'General/Common'
+  assign ornament_ref = product.metafields.custom.ornament_type.value
+  assign ornament_type = ornament_ref.name.value | default: ornament_ref.name | default: product.metafields.custom.ornament_type.value | default: product.metafields.custom.ornament_type | default: 'Ornament'
+  assign placement = product.metafields.custom.placement.value | default: product.metafields.custom.placement | default: 'Check product image'
+  assign confidence = product.metafields.custom.size_confidence.value | default: product.metafields.custom.size_confidence | default: 'Image / product details'
+  assign idol_min = product.metafields.custom.idol_height_min_in.value | default: product.metafields.custom.idol_height_min_in
+  assign idol_max = product.metafields.custom.idol_height_max_in.value | default: product.metafields.custom.idol_height_max_in
+  assign ornament_width = product.metafields.custom.ornament_width_in.value | default: product.metafields.custom.ornament_width_in
+  assign ornament_height = product.metafields.custom.ornament_height_in.value | default: product.metafields.custom.ornament_height_in
+  assign ornament_depth = product.metafields.custom.ornament_depth_in.value | default: product.metafields.custom.ornament_depth_in
+  assign material = product.metafields.custom.material.value | default: product.metafields.custom.material
+  assign fit_notes = product.metafields.custom.fit_notes.value | default: product.metafields.custom.fit_notes
+  assign regional_names_metafield = product.metafields.custom.regional_names
+  assign regional_names = product.metafields.custom.regional_names.value | default: product.metafields.custom.regional_names
+  assign regional_names_text = regional_names_metafield | metafield_text
+  assign regional_names_manual_display = product.metafields.custom.regional_names_display.value | default: product.metafields.custom.regional_names_display
+  assign regional_name_0 = regional_names_metafield.value[0]
+  assign regional_name_1 = regional_names_metafield.value[1]
+  assign regional_name_2 = regional_names_metafield.value[2]
+  assign regional_name_3 = regional_names_metafield.value[3]
+  assign regional_name_4 = regional_names_metafield.value[4]
+  assign regional_name_5 = regional_names_metafield.value[5]
+  assign regional_name_6 = regional_names_metafield.value[6]
+  assign regional_name_7 = regional_names_metafield.value[7]
+  assign measured_size = ''
+  if ornament_width != blank
+    assign measured_size = 'W ' | append: ornament_width | append: ' in'
+  endif
+  if ornament_height != blank
+    if measured_size != blank
+      assign measured_size = measured_size | append: ' / '
+    endif
+    assign measured_size = measured_size | append: 'H ' | append: ornament_height | append: ' in'
+  endif
+  if ornament_depth != blank
+    if measured_size != blank
+      assign measured_size = measured_size | append: ' / '
+    endif
+    assign measured_size = measured_size | append: 'D ' | append: ornament_depth | append: ' in'
+  endif
+-%}
+
+{%- capture idol_range -%}
+  {%- if idol_min != blank and idol_max != blank -%}
+    {{ idol_min }}-{{ idol_max }} in
+  {%- elsif idol_min != blank -%}
+    {{ idol_min }} in and above
+  {%- elsif idol_max != blank -%}
+    Up to {{ idol_max }} in
+  {%- else -%}
+    Check measured images
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture regional_names_display -%}
+  {%- if regional_name_0 != blank -%}
+    {{ regional_name_0 }}{% if regional_name_1 != blank %}, {{ regional_name_1 }}{% endif %}{% if regional_name_2 != blank %}, {{ regional_name_2 }}{% endif %}{% if regional_name_3 != blank %}, {{ regional_name_3 }}{% endif %}{% if regional_name_4 != blank %}, {{ regional_name_4 }}{% endif %}{% if regional_name_5 != blank %}, {{ regional_name_5 }}{% endif %}{% if regional_name_6 != blank %}, {{ regional_name_6 }}{% endif %}{% if regional_name_7 != blank %}, {{ regional_name_7 }}{% endif %}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if mode == 'compact' -%}
+  <div class="gc-deity-fit-brief" id="deity-fit-summary">
+    <div class="gc-deity-fit-brief__head">
+      <span>Size and fit check</span>
+      <a href="https://wa.me/917337294499?text={{ 'Hello Golden Collections, I need help checking deity jewellery size for ' | append: product.title | url_encode }}">
+        WhatsApp help
+      </a>
+    </div>
+    <dl class="gc-deity-fit-brief__grid">
+      <div>
+        <dt>Generally suitable for idol size</dt>
+        <dd>{{ idol_range | strip }}</dd>
+      </div>
+      <div>
+        <dt>Actual ornament measurement</dt>
+        <dd>
+          {%- if measured_size != blank -%}
+            {{ measured_size }}
+          {%- else -%}
+            See measuring tape image
+          {%- endif -%}
+        </dd>
+      </div>
+      <div>
+        <dt>Made for</dt>
+        <dd>{{ primary_deity }}</dd>
+      </div>
+      <div>
+        <dt>Placement</dt>
+        <dd>{{ placement }}</dd>
+      </div>
+    </dl>
+    <p>
+      Check the measuring tape image before ordering. Idol posture, head width, crown shape, and draping can affect fit.
+    </p>
+  </div>
+{%- else -%}
+<div class="gc-deity-fit" id="deity-fit-panel">
+  <div class="gc-deity-fit__badges" aria-label="Product fit summary">
+    <span>Made for {{ primary_deity }}</span>
+    <span>{{ compatibility }}</span>
+    <span>Quality checked</span>
+  </div>
+
+  <div class="gc-deity-fit__grid">
+    <div>
+      <span>Generally suitable for idol size</span>
+      <strong>{{ idol_range | strip }}</strong>
+    </div>
+    <div>
+      <span>Ornament type</span>
+      <strong>{{ ornament_type }}</strong>
+    </div>
+    <div>
+      <span>Actual ornament measurement</span>
+      <strong>
+        {%- if measured_size != blank -%}
+          {{ measured_size }}
+        {%- else -%}
+          See measuring tape image
+        {%- endif -%}
+      </strong>
+    </div>
+    <div>
+      <span>Placement</span>
+      <strong>{{ placement }}</strong>
+    </div>
+    {%- if material != blank -%}
+      <div>
+        <span>Material / plating</span>
+        <strong>{{ material }}</strong>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <p class="gc-deity-fit__note">
+    {%- if fit_notes != blank -%}
+      {{ fit_notes }}
+    {%- else -%}
+      Idol posture, head width, crown shape, and draping can affect fit. Use the measuring tape image before ordering.
+    {%- endif -%}
+  </p>
+
+  <div class="gc-deity-fit__checklist" aria-label="Before ordering checklist">
+    <strong>Before ordering, check</strong>
+    <ul>
+      <li>Generally suitable idol size is close to your idol height.</li>
+      <li>Actual ornament measurement fits the area where it will sit.</li>
+      <li>Placement and deity match how you plan to decorate the idol.</li>
+    </ul>
+  </div>
+
+  <div class="gc-deity-fit__actions">
+    <a href="https://wa.me/917337294499?text={{ 'Hello Golden Collections, I need help checking deity jewellery size for ' | append: product.title | url_encode }}" class="gc-deity-fit__whatsapp">
+      Ask size help on WhatsApp
+    </a>
+    <span>Fit confidence: {{ confidence }}</span>
+  </div>
+
+  {%- if regional_names_manual_display != blank or regional_names_display != blank or regional_names != blank -%}
+    <div class="gc-deity-fit__regional">
+      <span>Also searched as:</span>
+      <span class="gc-regional-list">
+        {%- if regional_names_manual_display != blank -%}
+          {{ regional_names_manual_display }}
+        {%- elsif regional_names_metafield != blank -%}
+          {{ regional_names_metafield | metafield_tag }}
+        {%- else -%}
+          {{ regional_names_text | default: regional_names }}
+        {%- endif -%}
+      </span>
+    </div>
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+<style>
+  .gc-deity-fit-brief {
+    border: 1px solid rgba(175, 129, 43, 0.24);
+    border-radius: 8px;
+    background: #fffaf0;
+    padding: 1.2rem;
+    margin: 1rem 0 1.2rem;
+  }
+
+  .gc-deity-fit-brief__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .gc-deity-fit-brief__head span {
+    color: #20180f;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .gc-deity-fit-brief__head a {
+    color: #1f7a4d;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .gc-deity-fit-brief__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin: 0;
+  }
+
+  .gc-deity-fit-brief__grid div {
+    border: 1px solid rgba(97, 65, 21, 0.12);
+    border-radius: 6px;
+    background: #ffffff;
+    padding: 0.75rem;
+  }
+
+  .gc-deity-fit-brief dt {
+    color: #756655;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    margin: 0 0 0.2rem;
+  }
+
+  .gc-deity-fit-brief dd {
+    color: #21180d;
+    font-size: 1.22rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .gc-deity-fit-brief p {
+    color: #564b3f;
+    font-size: 1.22rem;
+    line-height: 1.35;
+    margin: 0.9rem 0 0;
+  }
+
+  .gc-deity-fit {
+    border: 1px solid rgba(175, 129, 43, 0.25);
+    border-radius: 8px;
+    background: #fffbf2;
+    padding: 1.6rem;
+    margin: 1.4rem 0;
+  }
+
+  .gc-deity-fit__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .gc-deity-fit__badges span,
+  .gc-deity-fit__actions span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    border-radius: 999px;
+    background: #f6ead0;
+    color: #5e3d13;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    padding: 0.45rem 0.85rem;
+  }
+
+  .gc-deity-fit__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .gc-deity-fit__grid div {
+    border: 1px solid rgba(97, 65, 21, 0.14);
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 1rem;
+  }
+
+  .gc-deity-fit__grid span {
+    display: block;
+    color: #7a6a58;
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .gc-deity-fit__grid strong {
+    display: block;
+    color: #21180d;
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+
+  .gc-deity-fit__note,
+  .gc-deity-fit__regional {
+    color: #4f463c;
+    font-size: 1.35rem;
+    line-height: 1.45;
+    margin: 1.2rem 0 0;
+  }
+
+  .gc-deity-fit__checklist {
+    border: 1px solid rgba(31, 122, 77, 0.18);
+    border-radius: 8px;
+    background: #f3faf4;
+    color: #214c35;
+    margin-top: 1.2rem;
+    padding: 1.1rem 1.2rem;
+  }
+
+  .gc-deity-fit__checklist strong {
+    display: block;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+
+  .gc-deity-fit__checklist ul {
+    margin: 0;
+    padding-left: 1.8rem;
+  }
+
+  .gc-deity-fit__checklist li {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin: 0.25rem 0;
+  }
+
+  .gc-regional-list ul,
+  .gc-regional-list ol {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gc-regional-list li {
+    display: inline;
+  }
+
+  .gc-regional-list li:not(:last-child)::after {
+    content: ', ';
+  }
+
+  .gc-deity-fit__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+    margin-top: 1.2rem;
+  }
+
+  .gc-deity-fit__whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-radius: 6px;
+    background: #1f7a4d;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.75rem 1.15rem;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .gc-deity-fit-brief {
+      padding: 1rem;
+      margin: 0.85rem 0 1rem;
+    }
+
+    .gc-deity-fit-brief__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gc-deity-fit {
+      padding: 1.2rem;
+      margin: 1rem 0;
+    }
+
+    .gc-deity-fit__grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .gc-deity-fit__whatsapp {
+      width: 100%;
+    }
+  }
+</style>
